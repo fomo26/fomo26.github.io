@@ -503,6 +503,17 @@
       });
     }
   </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+        var script = document.createElement("script");
+        script.src = "https://cdn.counter.dev/script.js";
+        script.setAttribute("data-id", "b3dc771d-812f-4e64-9ff1-986190e73657");
+        script.setAttribute("data-utcoffset", "1");
+        document.head.appendChild(script);
+      }
+    });
+  </script>
 </body>
 
 </html>

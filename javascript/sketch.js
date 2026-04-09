@@ -95,7 +95,6 @@ function draw() {
   col = 150 + max(0, 170 - drawCount);
   drawCount++;
 
-  console.log(col);
   fill(col);
   stroke(col);
 
@@ -163,9 +162,9 @@ function Node(pos, size) {
 }
 
 Node.prototype.update = function() {
-  force = this.force.copy()
-  vel = force.copy().div(this.mass)
-  // print("VEL", vel, "FORCE", force)
+  let vel = this.force.copy().div(this.mass)
+  vel.mult(0.65)
+  vel.add(p5.Vector.random2D().mult(0.13))
   this.pos.add(vel)
 }
 

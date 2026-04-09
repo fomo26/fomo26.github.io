@@ -144,7 +144,7 @@
         </h2>
         <p class="text-xl mb-6">The Foundation Model Challenge for Brain MRI at MICCAI 2026</p>
         <p class="text-lg text-gray-700 max-w-3xl mx-auto">
-          Same core philosophy as FOMO25, now expanded with <span class="font-semibold">306,303 brain MRI scans</span>
+          Same core philosophy as FOMO25, now expanded with <span class="font-semibold">306,207 brain MRI scans</span>
           for pretraining and <span class="font-semibold">seven downstream tasks</span> evaluating generalization in
           realistic clinical settings.
         </p>
@@ -202,7 +202,8 @@
             regime.
           </p>
           <p class="mt-auto">
-            <span class="text-sm text-gray-400">Comprehensive code-release.</span>
+            <span class="text-sm text-gray-400">Comprehensive code-release.</span><br>
+            <span class="text-sm text-gray-400">$1000 prize money.</span>
           </p>
         </div>
 
@@ -213,7 +214,8 @@
             Participants may use additional public/private data and custom pipelines to maximize generalization.
           </p>
           <p class="mt-auto">
-            <span class="text-sm text-gray-400">Open-data and proprietary pipelines allowed.</span>
+            <span class="text-sm text-gray-400">Open-data and proprietary pipelines allowed.</span><br>
+            <span class="text-sm text-gray-400">$1000 prize money.</span>
           </p>
         </div>
       </div>
@@ -225,7 +227,7 @@
           As in FOMO25, all methods are evaluated on clinically relevant downstream tasks; FOMO26 expands the suite with
           additional tasks and broader scanner/domain coverage.
         </p>
-        <p class="mt-auto">No restrictions on fine-tuning strategy unless explicitly stated in task rules.</p>
+        <p class="mt-auto">No restrictions on finetuning strategy unless explicitly stated in task rules.</p>
       </div>
 
       <div class="flex justify-center items-center flex-wrap mt-8 text-center">
@@ -301,11 +303,11 @@
             <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded shrink-0">Task 3</span>
             <h3 class="text-base font-bold text-gray-900">Brain Age Estimation</h3>
           </div>
-          <p class="text-sm text-gray-600 mb-3">Regression of chronological brain age from T1w and T2w MRI scans across
+          <p class="text-sm text-gray-600 mb-3">Regression of chronological brain age from T1w MRI scans across
             a broad age range.</p>
           <div class="text-xs text-gray-500 space-y-1">
             <div><span class="font-medium">Type:</span> Regression</div>
-            <div><span class="font-medium">Modality:</span> T1w + T2w MRI</div>
+            <div><span class="font-medium">Modality:</span> T1w MRI</div>
             <div><span class="font-medium">Metric:</span> MAE + Correlation coefficient</div>
           </div>
         </div>
@@ -321,7 +323,7 @@
             relevant to surgical planning.</p>
           <div class="text-xs text-gray-500 space-y-1">
             <div><span class="font-medium">Type:</span> Segmentation (multiclass)</div>
-            <div><span class="font-medium">Modality:</span> T1w MRI</div>
+            <div><span class="font-medium">Modality:</span> T2w MRI</div>
             <div><span class="font-medium">Metric:</span> DSC + NSD</div>
           </div>
         </div>
@@ -349,11 +351,11 @@
               6 — New</span>
             <h3 class="text-base font-bold text-gray-900">Linear Probing</h3>
           </div>
-          <p class="text-sm text-gray-600 mb-3">Embedding quality assessment via linear separability — no fine-tuning
+          <p class="text-sm text-gray-600 mb-3">Embedding quality assessment via linear separability — no finetuning
             allowed. Measures what the model learned during pretraining.</p>
           <div class="text-xs text-gray-500 space-y-1">
             <div><span class="font-medium">Type:</span> Representation quality</div>
-            <div><span class="font-medium">Constraint:</span> No fine-tuning</div>
+            <div><span class="font-medium">Constraint:</span> No finetuning</div>
             <div><span class="font-medium">Metric:</span> OvR AUROC + F1</div>
           </div>
         </div>
@@ -369,7 +371,7 @@
             Assesses whether embeddings encode or suppress demographic and acquisition biases.</p>
           <div class="text-xs text-gray-500 space-y-1">
             <div><span class="font-medium">Type:</span> Fairness evaluation</div>
-            <div><span class="font-medium">Constraint:</span> No fine-tuning (same setup as Task 6)</div>
+            <div><span class="font-medium">Constraint:</span> No finetuning (same setup as Task 6)</div>
             <div><span class="font-medium">Metric:</span> OvR AUROC + F1 across demographic groups</div>
           </div>
         </div>
@@ -382,7 +384,7 @@
 
       <div class="space-y-8">
         <section>
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Organizing Committee</h3>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Organising Committee</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-gray-700">
             <div><span class="font-semibold">Stefano Cerri</span> <span class="text-pink-600 text-xs font-medium">Lead
                 Organizer</span><br><span class="text-sm text-gray-500">University of Copenhagen &amp; Pioneer Centre
@@ -400,8 +402,6 @@
                 class="text-sm text-gray-500">University of Copenhagen &amp; Pioneer Centre For AI</span></div>
             <div><span class="font-semibold">Zahra Sobhaninia</span><br><span class="text-sm text-gray-500">University
                 of Copenhagen &amp; Pioneer Centre For AI</span></div>
-            <div><span class="font-semibold">Mostafa Mehdipour Ghazi</span><br><span
-                class="text-sm text-gray-500">University of Copenhagen &amp; Pioneer Centre For AI</span></div>
             <div><span class="font-semibold">Alice Schiavone</span><br><span class="text-sm text-gray-500">University of
                 Copenhagen</span></div>
             <div><span class="font-semibold">Leila Khaertdinova</span><br><span class="text-sm text-gray-500">University
@@ -410,28 +410,36 @@
                 class="text-sm text-gray-500">University of Copenhagen</span></div>
             <div><span class="font-semibold">Said Djafar Said</span><br><span class="text-sm text-gray-500">University
                 of Copenhagen</span></div>
-            <div><span class="font-semibold">Bulat Ibragimov</span><br><span class="text-sm text-gray-500">University of
-                Copenhagen</span></div>
-            <div><span class="font-semibold">Melanie Benjamin Ganz</span><br><span
-                class="text-sm text-gray-500">University of Copenhagen &amp; Copenhagen University Hospital,
-                Rigshospitalet</span></div>
             <div><span class="font-semibold">Llucia Coll</span><br><span class="text-sm text-gray-500">Copenhagen
                 University Hospital, Rigshospitalet</span></div>
             <div><span class="font-semibold">Christian Hedeager Krag</span><br><span
                 class="text-sm text-gray-500">Radiological AI Testcenter, Denmark</span></div>
+            <div><span class="font-semibold">Vardan Nersesjan</span><br><span class="text-sm text-gray-500">Copenhagen
+                University Hospital, Rigshospitalet</span></div>
+            <div><span class="font-semibold">Peirong Liu</span><br><span class="text-sm text-gray-500">Johns Hopkins
+                University</span></div>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Scientific Committee</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-gray-700">
+            <div><span class="font-semibold">Bulat Ibragimov</span><br><span class="text-sm text-gray-500">University of
+                Copenhagen</span></div>
+            <div><span class="font-semibold">Mostafa Mehdipour Ghazi</span><br><span
+                class="text-sm text-gray-500">University of Copenhagen &amp; Pioneer Centre For AI</span></div>
+            <div><span class="font-semibold">Melanie Benjamin Ganz</span><br><span
+                class="text-sm text-gray-500">University of Copenhagen &amp; Copenhagen University Hospital,
+                Rigshospitalet</span></div>
             <div><span class="font-semibold">Mikael Ploug Boesen</span><br><span
                 class="text-sm text-gray-500">Radiological AI Testcenter &amp; Copenhagen University Hospital</span>
             </div>
             <div><span class="font-semibold">Espen Jimenez Solem</span><br><span
                 class="text-sm text-gray-500">Copenhagen University Hospital</span></div>
-            <div><span class="font-semibold">Vardan Nersesjan</span><br><span class="text-sm text-gray-500">Copenhagen
-                University Hospital, Rigshospitalet</span></div>
             <div><span class="font-semibold">Michael Eriksen Benros</span><br><span class="text-sm text-gray-500">Mental
                 Health Centre Copenhagen &amp; University of Copenhagen</span></div>
             <div><span class="font-semibold">Juan Eugenio Iglesias</span><br><span class="text-sm text-gray-500">MGH /
                 Harvard Medical School &amp; MIT</span></div>
-            <div><span class="font-semibold">Peirong Liu</span><br><span class="text-sm text-gray-500">Johns Hopkins
-                University</span></div>
             <div><span class="font-semibold">Risheng Xu</span><br><span class="text-sm text-gray-500">Johns Hopkins
                 University</span></div>
             <div><span class="font-semibold">Mads Nielsen</span><br><span class="text-sm text-gray-500">University of

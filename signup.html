@@ -121,33 +121,36 @@
             <p class="mt-1 text-sm text-gray-700 mb-4">This <span class="italic">must</span> be done as the first
               step.</p>
             <ol class="list-decimal pl-6 text-sm text-gray-700 space-y-2">
-              <li>Go to the FOMO26 Synapse page and sign up: <a href="https://www.synapse.org/Synapse:syn72120565/wiki/640173"
-                  target="_blank" rel="noopener noreferrer" class="text-indigo-600 underline">FOMO26 on Synapse</a>.
+              <li>Go to the FOMO26 Synapse page and sign up: <a
+                  href="https://www.synapse.org/Synapse:syn72120565/wiki/640173" target="_blank"
+                  rel="noopener noreferrer" class="text-indigo-600 underline">FOMO26 on Synapse</a>.
               </li>
             </ol>
 
             <div class="mt-8 space-y-6">
               <div class="border border-gray-200 rounded-md p-4 bg-gray-50 space-y-6">
-              <div>
-                <label for="synapse-username-step1" class="block text-sm font-medium text-gray-700">Synapse Username*</label>
-                <input type="text" id="synapse-username-step1" x-model="synapseUsername"
-                  class="mt-2 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                <p class="mt-1 text-sm text-gray-500">
-                  To find your Synapse username click "Your Account" then "View Profile" in the bottom-left of the
-                  Synapse UI. For example, the username for the following individual would be "my-synapse-username":
-                </p>
-                <img src="images/synapse-username.png" alt="Example showing where to find the Synapse username"
-                  class="mt-2 ml-8 max-h-64 rounded-md shadow-sm">
-              </div>
-              <div>
-                <label for="synapse-team-name-step1" class="block text-sm font-medium text-gray-700">Synapse Team Name*</label>
-                <input type="text" id="synapse-team-name-step1" x-model="synapseTeamName"
-                  class="mt-2 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                <p class="mt-1 text-sm text-gray-500">
-                  Participation requires a team on Synapse. Please enter your team name. If you have not yet created a
-                  team, create one on Synapse before continuing.
-                </p>
-              </div>
+                <div>
+                  <label for="synapse-username-step1" class="block text-sm font-medium text-gray-700">Synapse
+                    Username*</label>
+                  <input type="text" id="synapse-username-step1" x-model="synapseUsername"
+                    class="mt-2 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                  <p class="mt-1 text-sm text-gray-500">
+                    To find your Synapse username click "Your Account" then "View Profile" in the bottom-left of the
+                    Synapse UI. For example, the username for the following individual would be "my-synapse-username":
+                  </p>
+                  <img src="images/synapse-username.png" alt="Example showing where to find the Synapse username"
+                    class="mt-2 ml-8 max-h-64 rounded-md shadow-sm">
+                </div>
+                <div>
+                  <label for="synapse-team-name-step1" class="block text-sm font-medium text-gray-700">Synapse Team
+                    Name*</label>
+                  <input type="text" id="synapse-team-name-step1" x-model="synapseTeamName"
+                    class="mt-2 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                  <p class="mt-1 text-sm text-gray-500">
+                    Participation requires a team on Synapse. Please enter your team name. If you have not yet created a
+                    team, create one on Synapse before continuing.
+                  </p>
+                </div>
               </div>
               <div class="flex items-center">
                 <input id="confirm-synapse-registration" name="confirm-synapse-registration" type="checkbox"
@@ -292,13 +295,6 @@
               <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Terms and Agreements</h3>
               <fieldset>
                 <div class="mt-2 space-y-3">
-                  <div class="flex items-start">
-                    <input id="citation-policy" name="citation-policy" type="checkbox" required
-                      class="mt-0.5 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                    <label for="citation-policy" class="ml-2 text-sm text-gray-700">I agree that any usage of the
-                      provided data will adhere to the <a href="https://fomo25.github.io/citations" target="_blank"
-                        rel="noopener noreferrer" class="text-indigo-600 underline">Citation Policy</a></label>
-                  </div>
                   <div class="flex items-start">
                     <input id="data-usage" name="data-usage" type="checkbox" required
                       class="mt-0.5 h-4 w-4 text-indigo-600 border-gray-300 rounded">

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Signup - FOMO26 - Foundation Model Challenge for Brain MRI</title>
+  <meta name="description" content="Sign up for FOMO26 at MICCAI 2026." />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+    .logo-fomo {
+      background: linear-gradient(to right, #2563eb, #db2777);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-26 {
+      color: #db2777;
+    }
+
+    .logo-link {
+      transition: filter 0.3s ease;
+      will-change: filter;
+      transform: translateZ(0);
+    }
+
+    .logo-link:hover {
+      filter: drop-shadow(0 0 10px rgba(219, 39, 119, 0.65));
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900 overflow-x-hidden">
+
+  <header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
+      <h1 class="text-3xl font-bold tracking-tight"><a href="index.html" class="logo-link" title=" "><span
+            class="logo-fomo">FOMO</span><span class="logo-26">26</span></a></h1>
+
+      <button id="menu-toggle" class="focus:outline-none block md:hidden" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <nav class="hidden md:block">
+        <ul class="flex space-x-4 justify-center items-center">
+          <li><a href="index.html#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
+          <li><a href="index.html#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
+          <li><a href="index.html#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
+          <li class="relative">
+            <button id="editions-toggle" onclick="document.getElementById('editions-menu').classList.toggle('hidden')"
+              class="text-gray-900 hover:text-gray-600 flex items-center gap-1">
+              Previous editions
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul id="editions-menu"
+              class="hidden absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <li><a href="https://fomo25.github.io" target="_blank" rel="noopener noreferrer"
+                  class="block px-4 py-2 text-gray-900 hover:bg-gray-100 rounded-lg">FOMO25</a></li>
+            </ul>
+          </li>
+          <li><a href="signup.html" class="text-pink-600 font-semibold hover:text-pink-700">Sign Up</a></li>
+        </ul>
+      </nav>
+
+      <div id="mobile-menu"
+        class="fixed top-0 left-0 h-full w-64 bg-white shadow transform -translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden p-6">
+        <button id="close-menu" class="mb-4 focus:outline-none" aria-label="Close menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        <ul class="flex flex-col space-y-4">
+          <li><a href="index.html#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
+          <li><a href="index.html#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
+          <li><a href="index.html#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
+          <li>
+            <p class="text-gray-500 text-sm font-medium mb-1">Previous editions</p>
+            <a href="https://fomo25.github.io" target="_blank" rel="noopener noreferrer"
+              class="text-gray-900 hover:text-gray-600 pl-2">FOMO25</a>
+          </li>
+          <li><a href="signup.html" class="text-pink-600 font-semibold hover:text-pink-700">Sign Up</a></li>
+        </ul>
+      </div>
+
+      <a href="https://conferences.miccai.org/2026/en/" target="_blank" rel="noopener noreferrer">
+        <img src="images/miccai.png" alt="MICCAI Logo" class="h-20 w-auto object-contain" />
+      </a>
+    </div>
+  </header>
+
+  <main class="pb-10">
+    <div class="bg-white text-gray-900 max-w-4xl mx-auto px-8 py-16 my-8 rounded-lg shadow-md"
+      x-data="{ checkboxSynapse: false, showForm: false, highlightNewSection: false, synapseUsername: '', synapseTeamName: '' }">
+
+      <h1 class="text-2xl font-bold text-center mb-8">Sign Up for FOMO26</h1>
+
+      <div class="mb-12 space-y-12">
+
+        <!-- Step 1: Synapse Registration -->
+        <div class="flex items-start space-x-4">
+          <div class="flex-shrink-0">
+            <span
+              class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-400 text-white font-bold">1</span>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-lg font-semibold">Register for the challenge on Synapse (required!)</h2>
+            <p class="mt-1 text-sm text-gray-700 mb-4">This <span class="italic">must</span> be done as the first
+              step.</p>
+            <ol class="list-decimal pl-6 text-sm text-gray-700 space-y-2">
+              <li>Go to the FOMO26 Synapse page and sign up: <a href="https://www.synapse.org/Synapse:syn72120565/wiki/640173"
+                  target="_blank" rel="noopener noreferrer" class="text-indigo-600 underline">FOMO26 on Synapse</a>.
+              </li>
+            </ol>
+
+            <div class="mt-8 space-y-6">
+              <div class="border border-gray-200 rounded-md p-4 bg-gray-50 space-y-6">
+              <div>
+                <label for="synapse-username-step1" class="block text-sm font-medium text-gray-700">Synapse Username*</label>
+                <input type="text" id="synapse-username-step1" x-model="synapseUsername"
+                  class="mt-2 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                <p class="mt-1 text-sm text-gray-500">
+                  To find your Synapse username click "Your Account" then "View Profile" in the bottom-left of the
+                  Synapse UI. For example, the username for the following individual would be "my-synapse-username":
+                </p>
+                <img src="images/synapse-username.png" alt="Example showing where to find the Synapse username"
+                  class="mt-2 ml-8 max-h-64 rounded-md shadow-sm">
+              </div>
+              <div>
+                <label for="synapse-team-name-step1" class="block text-sm font-medium text-gray-700">Synapse Team Name*</label>
+                <input type="text" id="synapse-team-name-step1" x-model="synapseTeamName"
+                  class="mt-2 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                <p class="mt-1 text-sm text-gray-500">
+                  Participation requires a team on Synapse. Please enter your team name. If you have not yet created a
+                  team, create one on Synapse before continuing.
+                </p>
+              </div>
+              </div>
+              <div class="flex items-center">
+                <input id="confirm-synapse-registration" name="confirm-synapse-registration" type="checkbox"
+                  x-model="checkboxSynapse" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                <label for="confirm-synapse-registration" class="ml-2 text-sm text-gray-700">
+                  I confirm that I have registered for the challenge on Synapse
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Continue button -->
+      <div class="mb-12 pl-14">
+        <button
+          @click="showForm = true; highlightNewSection = true; setTimeout(() => { highlightNewSection = false; }, 3000); setTimeout(() => { document.getElementById('form-step-2').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100)"
+          :disabled="!checkboxSynapse || !synapseUsername.trim() || !synapseTeamName.trim()"
+          :class="{'bg-indigo-600 hover:bg-indigo-700': checkboxSynapse && synapseUsername.trim() && synapseTeamName.trim(), 'bg-gray-400 cursor-not-allowed': !checkboxSynapse || !synapseUsername.trim() || !synapseTeamName.trim()}"
+          class="py-2 px-6 rounded-md shadow text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
+          Continue
+        </button>
+      </div>
+
+      <!-- Step 3: Form -->
+      <div id="form-step-2" class="flex items-start space-x-4 pt-4" x-show="showForm" x-transition x-cloak>
+        <div class="flex-shrink-0">
+          <span
+            class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-400 text-white font-bold">2</span>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-lg font-semibold mb-6">Fill out the following form</h2>
+
+          <form action="https://formsubmit.co/fomo26@di.ku.dk" method="POST" class="space-y-8">
+
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_subject" value="New FOMO26 Challenge Signup">
+            <input type="hidden" name="_autoresponse"
+              value="Thank you for signing up for the FOMO26 Challenge! We will get back to you as soon as possible with instructions on how to access data.">
+
+            <!-- Synapse fields passed through from Step 1 -->
+            <input type="hidden" name="synapse-username" x-bind:value="synapseUsername">
+            <input type="hidden" name="synapse-team-name" x-bind:value="synapseTeamName">
+
+            <!-- Personal Information -->
+            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
+              <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Personal Information</h3>
+              <div class="space-y-4">
+                <div class="flex space-x-4">
+                  <div class="w-1/2">
+                    <label for="first-name" class="block text-sm font-medium text-gray-700">First Name*</label>
+                    <input type="text" id="first-name" name="first-name" required
+                      class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                  </div>
+                  <div class="w-1/2">
+                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last Name*</label>
+                    <input type="text" id="last-name" name="last-name" required
+                      class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                  </div>
+                </div>
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700">Email Address*</label>
+                  <input type="email" id="email" name="email" required
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                </div>
+              </div>
+            </div>
+
+            <!-- Affiliation -->
+            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
+              <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Affiliation</h3>
+              <div class="space-y-4">
+                <div>
+                  <label for="affiliated-institution" class="block text-sm font-medium text-gray-700">Affiliated
+                    Institution*</label>
+                  <input type="text" id="affiliated-institution" name="affiliated-institution" required
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                </div>
+                <div>
+                  <label for="city" class="block text-sm font-medium text-gray-700">City*</label>
+                  <input type="text" id="city" name="city" required
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                </div>
+                <div>
+                  <label for="country" class="block text-sm font-medium text-gray-700">Country*</label>
+                  <input type="text" id="country" name="country" required
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                </div>
+                <div>
+                  <label for="position" class="block text-sm font-medium text-gray-700">Position*</label>
+                  <select id="position" name="position" required
+                    class="mt-1 block w-full border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 bg-white">
+                    <option value="">-- Select your position --</option>
+                    <option value="PhD Student/Candidate">PhD Student / Candidate</option>
+                    <option value="Professor">Professor</option>
+                    <option value="Associate/Assistant Professor">Associate/Assistant Professor</option>
+                    <option value="Postdoc">Postdoc</option>
+                    <option value="Graduate Student">Graduate Student</option>
+                    <option value="Student">Student — other</option>
+                    <option value="Research Scientist">Research Scientist</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div id="other-position-field" class="hidden">
+                  <label for="other-position" class="block text-sm font-medium text-gray-700">Please specify your
+                    position*</label>
+                  <input type="text" id="other-position" name="other-position"
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                </div>
+              </div>
+            </div>
+
+            <!-- Research Group Information -->
+            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
+              <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Research Group Information
+                <span class="text-gray-400 font-normal text-sm">(optional)</span>
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <label for="research-group" class="block text-sm font-medium text-gray-700">Name of your research
+                    group</label>
+                  <input type="text" id="research-group" name="research-group"
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                </div>
+                <div>
+                  <label for="pi-name" class="block text-sm font-medium text-gray-700">PI Name</label>
+                  <input type="text" id="pi-name" name="pi-name"
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                </div>
+                <div>
+                  <label for="pi-email" class="block text-sm font-medium text-gray-700">PI Email</label>
+                  <input type="email" id="pi-email" name="pi-email"
+                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
+                </div>
+              </div>
+            </div>
+
+            <!-- Terms and Agreements -->
+            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
+              <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Terms and Agreements</h3>
+              <fieldset>
+                <div class="mt-2 space-y-3">
+                  <div class="flex items-start">
+                    <input id="citation-policy" name="citation-policy" type="checkbox" required
+                      class="mt-0.5 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                    <label for="citation-policy" class="ml-2 text-sm text-gray-700">I agree that any usage of the
+                      provided data will adhere to the <a href="https://fomo25.github.io/citations" target="_blank"
+                        rel="noopener noreferrer" class="text-indigo-600 underline">Citation Policy</a></label>
+                  </div>
+                  <div class="flex items-start">
+                    <input id="data-usage" name="data-usage" type="checkbox" required
+                      class="mt-0.5 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                    <label for="data-usage" class="ml-2 text-sm text-gray-700">I agree to the <a
+                        href="https://fomo25.github.io/dua" target="_blank" rel="noopener noreferrer"
+                        class="text-indigo-600 underline">Data Usage Agreement</a></label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+
+            <div>
+              <button type="submit"
+                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
+                Submit Registration
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+      <!-- Step 3: Wait for email -->
+      <div class="flex items-start space-x-4 pt-12" x-show="showForm" x-transition x-cloak>
+        <div class="flex-shrink-0">
+          <span
+            class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-400 text-white font-bold">3</span>
+        </div>
+        <div class="flex-1">
+          <p class="text-lg font-semibold">Wait for Email</p>
+          <p class="mt-1 text-sm text-gray-700">
+            We will verify your information and send you instructions on how to access data. We strive to do this
+            within 24 hours during weekdays CET, but please note that it can take up to 72 hours.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-gray-200 py-6 mt-0 w-full">
+    <div class="max-w-7xl mx-auto text-center text-sm text-gray-600">
+      &copy; 2026 FOMO Challenge. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const toggleBtn = document.getElementById("menu-toggle");
+    const closeBtn = document.getElementById("close-menu");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    document.addEventListener("click", (e) => {
+      const toggle = document.getElementById("editions-toggle");
+      const menu = document.getElementById("editions-menu");
+      if (toggle && menu && !toggle.contains(e.target)) {
+        menu.classList.add("hidden");
+      }
+    });
+
+    if (toggleBtn && closeBtn && mobileMenu) {
+      toggleBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("-translate-x-full");
+      });
+      closeBtn.addEventListener("click", () => {
+        mobileMenu.classList.add("-translate-x-full");
+      });
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("-translate-x-full");
+        });
+      });
+    }
+
+    // Show "Other" position text field
+    document.getElementById('position').addEventListener('change', function () {
+      const otherField = document.getElementById('other-position-field');
+      if (this.value === 'Other') {
+        otherField.classList.remove('hidden');
+        document.getElementById('other-position').required = true;
+      } else {
+        otherField.classList.add('hidden');
+        document.getElementById('other-position').required = false;
+      }
+    });
+  </script>
+
+</body>
+
+</html>

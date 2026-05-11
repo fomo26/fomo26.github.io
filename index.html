@@ -188,9 +188,11 @@
           <img src="images/rh.jpg" alt="Rigshospitalet" class="h-8 w-auto object-contain" />
         </div>
         <div class="flex justify-center items-center gap-2 mt-7 mb-6 text-gray-600 text-sm">
-          <a href="https://huggingface.co/datasets/FOMO-MRI/FOMO300K" target="_blank" rel="noopener noreferrer" class="font-semibold text-gray-800 hover:underline">FOMO300K</a>
+          <a href="https://huggingface.co/datasets/FOMO-MRI/FOMO300K" target="_blank" rel="noopener noreferrer"
+            class="font-semibold text-gray-800 hover:underline">FOMO300K</a>
           <span>hosted with support from</span>
-          <a href="https://huggingface.co" target="_blank" rel="noopener noreferrer"><img src="images/hf-logo-with-title.svg" alt="Hugging Face" class="h-8 w-auto object-contain" /></a>
+          <a href="https://huggingface.co" target="_blank" rel="noopener noreferrer"><img
+              src="images/hf-logo-with-title.svg" alt="Hugging Face" class="h-8 w-auto object-contain" /></a>
         </div>
         <div class="flex justify-center items-center flex-wrap mt-4 text-gray-700">
           <a href="/signup"
@@ -395,8 +397,10 @@
       <h2 class="text-2xl font-bold mb-4">Challenge Overview</h2>
       <p class="text-gray-700 mb-6">
         The goal is to pretrain a foundation model and evaluate it on 7 downstream tasks, of which 5 require finetuning.
-        Tasks 5 and 6 are linear probing tasks — participants only need to provide a container that produces an embedding per input; no finetuning is necessary.
-        We provide boilerplate code for all tasks, including how to build the submission containers, to minimize workload.
+        Tasks 5 and 6 are linear probing tasks — participants only need to provide a container that produces an
+        embedding per input; no finetuning is necessary.
+        We provide boilerplate code for all tasks, including how to build the submission containers, to minimize
+        workload.
       </p>
       <img src="images/fomo26.png" alt="FOMO26 challenge overview" class="w-full rounded-lg" />
     </section>
@@ -433,14 +437,14 @@
       <div class="bg-gray-50 border border-gray-200 p-5 rounded-lg shadow-sm mb-6">
         <h3 class="text-lg font-bold text-gray-900 mb-2">Single Pretrained Model Across Tasks</h3>
         <p class="text-sm text-gray-700">Each submission must use the <span class="font-semibold">same
-          pretrained checkpoint across all downstream tasks</span>. Submitting different pretrained
+            pretrained checkpoint across all downstream tasks</span>. Submitting different pretrained
           checkpoints for different tasks is not allowed.</p>
       </div>
 
       <div class="bg-gray-50 border border-gray-200 p-5 rounded-lg shadow-sm mb-6">
         <h3 class="text-lg font-bold text-gray-900 mb-2">Finetuning Data</h3>
         <p class="text-sm text-gray-700">For both tracks, additional data is <span class="font-semibold">not
-          allowed for finetuning</span>. The premise of the challenge is to evaluate model performance in the
+            allowed for finetuning</span>. The premise of the challenge is to evaluate model performance in the
           context of few-shot generalization on clinical data. Allowing participants to use their own data
           for finetuning would meaningfully divert from this and is thus not allowed.</p>
       </div>
@@ -448,14 +452,15 @@
       <div class="bg-gray-50 border border-gray-200 p-5 rounded-lg shadow-sm mb-6">
         <h3 class="text-lg font-bold text-gray-900 mb-2">Validation Attempts</h3>
         <p class="text-sm text-gray-700">Each team is allowed a <span class="font-semibold">maximum of 3
-          valid attempts per task per track</span> on the validation leaderboard.</p>
+            valid attempts per task per track</span> on the validation leaderboard.</p>
       </div>
 
       <div class="bg-gray-50 border border-gray-200 p-5 rounded-lg shadow-sm">
         <h3 class="text-lg font-bold text-gray-900 mb-2">Runtime Constraint</h3>
         <p class="text-sm text-gray-700">Submissions are subject to a runtime limit of
           <span class="font-semibold">120 seconds per case</span> on a compute node with an 80&nbsp;GB VRAM
-          H100 GPU and 32 CPUs.</p>
+          H100 GPU and 32 CPUs.
+        </p>
       </div>
     </section>
 
@@ -501,7 +506,7 @@
         <div class="bg-gray-50 border border-gray-200 p-5 rounded-lg shadow-sm">
           <h3 class="text-lg font-bold text-gray-900 mb-3">Prizes</h3>
           <p class="text-sm text-gray-700 mb-3">A cash prize of <span class="font-semibold">$1,000 per
-            track</span>, distributed among the top three teams on the unified leaderboard:</p>
+              track</span>, distributed among the top three teams on the unified leaderboard:</p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div class="bg-white border border-gray-200 p-3 rounded text-center">
               <div class="text-xs font-semibold text-gray-500 mb-1">1st place</div>
@@ -522,15 +527,17 @@
 
     <section id="publication" class="bg-white text-gray-900 max-w-4xl mx-auto px-8 py-12 my-8 rounded-lg shadow-md">
       <h2 class="text-2xl font-bold mb-4">Publication Policy</h2>
-      <p class="text-gray-700 mb-4">The aim is a publication in a journal such as <span
-        class="font-medium">Nature Methods</span>, <span class="font-medium">Medical Image Analysis</span>,
+      <p class="text-gray-700 mb-4">The aim is a publication in a journal such as <span class="font-medium">Nature
+          Methods</span>, <span class="font-medium">Medical Image Analysis</span>,
         <span class="font-medium">npj Digital Medicine</span>, or <span class="font-medium">IEEE Transactions
-        on Medical Imaging</span>.</p>
+          on Medical Imaging</span>.
+      </p>
       <p class="text-gray-700">All participating teams that have made substantial submissions
         <span class="font-semibold">to all tasks</span> — excluding trivial approaches such as zero-output
         predictions, random guessing, or unmodified baseline use — will be invited to contribute to the
         manuscript. Each team can have at most <span class="font-semibold">five authors</span> on the
-        publication. Exemptions will be considered on a case-by-case basis.</p>
+        publication. Exemptions will be considered on a case-by-case basis.
+      </p>
     </section>
 
     <section id="team" class="bg-white text-gray-900 max-w-4xl mx-auto px-8 py-12 my-8 rounded-lg shadow-md">
@@ -607,11 +614,18 @@
     <section class="bg-white text-gray-900 max-w-4xl mx-auto px-8 py-12 my-8 rounded-lg shadow-md">
       <h2 class="text-2xl font-bold mb-6">News</h2>
       <div class="mb-6 pb-6 border-b border-gray-200">
-        <h3 class="text-xl font-semibold">Signup is Now Open</h3>
+        <h3 class="text-xl font-semibold">Signup Is Now Open</h3>
         <p class="text-sm text-gray-700">April 20, 2026</p>
         <p class="mt-2">
-          Registration for FOMO26 is now open! <a href="/signup" class="text-indigo-600 hover:underline">Sign up</a> to participate and get access to the pretraining dataset and finetuning data.
+          Registration for FOMO26 is now open! <a href="/signup" class="text-indigo-600 hover:underline">Sign up</a> to
+          participate and get access to the pretraining dataset and finetuning data.
         </p>
+      </div>
+      <div class="mb-6 pb-6 border-b border-gray-200">
+        <h3 class="text-xl font-semibold">FOMO25 Paper Is now Available</h3>
+        <p class="text-sm text-gray-700">April 13, 2026</p>
+        <p class="mt-2">The <a href="https://arxiv.org/abs/2604.11679" class="text-indigo-600 hover:underline"
+            target="_blank">FOMO25 paper</a> summarizing the results from last year's challenge is now on arXiv!</p>
       </div>
       <div>
         <h3 class="text-xl font-semibold">Announcing FOMO26</h3>
@@ -627,46 +641,60 @@
       <h2 class="text-2xl font-bold mb-8">FAQ</h2>
       <div class="space-y-3">
         <details class="border border-gray-200 rounded-lg">
-          <summary class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
+          <summary
+            class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
             How will you process my models?
             <span class="text-gray-400 text-xl leading-none">+</span>
           </summary>
-          <p class="px-5 pb-4 text-gray-700">Models will only be used for purposes of the challenge and subsequently deleted. The challenge organizers are able to sign confidentiality agreements when necessary. Please contact us for more info.</p>
+          <p class="px-5 pb-4 text-gray-700">Models will only be used for purposes of the challenge and subsequently
+            deleted. The challenge organizers are able to sign confidentiality agreements when necessary. Please contact
+            us for more info.</p>
         </details>
         <details class="border border-gray-200 rounded-lg">
-          <summary class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
+          <summary
+            class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
             How can I learn from last year's challenge?
             <span class="text-gray-400 text-xl leading-none">+</span>
           </summary>
           <div class="px-5 pb-4 text-gray-700">
-            <p>Read the challenge paper from last year! The <a href="https://arxiv.org/abs/2604.11679" class="text-pink-600 hover:underline" target="_blank">FOMO25 paper</a> summarizes the challenge and includes detailed descriptions of all 19 submitted foundation models from 16 teams. In particular we find:</p>
+            <p>Read the challenge paper from last year! The <a href="https://arxiv.org/abs/2604.11679"
+                class="text-pink-600 hover:underline" target="_blank">FOMO25 paper</a> summarizes the challenge and
+              includes detailed descriptions of all 19 submitted foundation models from 16 teams. In particular we find:
+            </p>
             <ul class="list-disc pl-6 mt-2 space-y-1">
-              <li>Self-supervised pretraining improves generalization on clinical data under domain shift, with models trained outside the target domain surpassing supervised baselines trained within-domain.</li>
-              <li>Different pretraining objectives suit different tasks — masked autoencoders favor segmentation while hybrid reconstruction-contrastive methods excel at classification.</li>
-              <li>Smaller pretrained models achieved strong performance, and increasing model size or training duration did not consistently improve results.</li>
+              <li>Self-supervised pretraining improves generalization on clinical data under domain shift, with models
+                trained outside the target domain surpassing supervised baselines trained within-domain.</li>
+              <li>Different pretraining objectives suit different tasks — masked autoencoders favor segmentation while
+                hybrid reconstruction-contrastive methods excel at classification.</li>
+              <li>Smaller pretrained models achieved strong performance, and increasing model size or training duration
+                did not consistently improve results.</li>
             </ul>
           </div>
         </details>
         <details class="border border-gray-200 rounded-lg">
-          <summary class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
+          <summary
+            class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
             Am I required to make my code publicly available?
             <span class="text-gray-400 text-xl leading-none">+</span>
           </summary>
-          <p class="px-5 pb-4 text-gray-700">Publishing code is not mandatory. However, participants must provide sufficient methodological detail in their submission to allow reproducibility if they wish to be included in the follow-up publication. We of course highly encourage all participants to publish their code.</p>
+          <p class="px-5 pb-4 text-gray-700">Publishing code is not mandatory. However, participants must provide
+            sufficient methodological detail in their submission to allow reproducibility if they wish to be included in
+            the follow-up publication. We of course highly encourage all participants to publish their code.</p>
         </details>
       </div>
     </section>
 
     <section class="bg-white text-gray-900 max-w-4xl mx-auto px-8 py-12 my-8 rounded-lg shadow-md text-center">
-        <h2 class="text-3xl font-bold mb-6 text-gray-900">Join the Challenge</h2>
-        <p class="text-gray-700 mb-6">
-          Interested in participating, sponsoring, or collaborating? Sign up now to get notified and secure your spot.
-        </p>
-        <a href="/signup"
-          class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-md shadow transition-colors">
-          Sign Up for FOMO26
-        </a>
-        <p class="text-gray-500 mt-6">Or contact us at <a href="mailto:fomo26@di.ku.dk" class="text-pink-600 hover:underline">fomo26@di.ku.dk</a></p>
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">Join the Challenge</h2>
+      <p class="text-gray-700 mb-6">
+        Interested in participating, sponsoring, or collaborating? Sign up now to get notified and secure your spot.
+      </p>
+      <a href="/signup"
+        class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-md shadow transition-colors">
+        Sign Up for FOMO26
+      </a>
+      <p class="text-gray-500 mt-6">Or contact us at <a href="mailto:fomo26@di.ku.dk"
+          class="text-pink-600 hover:underline">fomo26@di.ku.dk</a></p>
     </section>
   </main>
 

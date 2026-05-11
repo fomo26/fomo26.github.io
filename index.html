@@ -635,6 +635,20 @@
         </details>
         <details class="border border-gray-200 rounded-lg">
           <summary class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
+            How can I learn from last year's challenge?
+            <span class="text-gray-400 text-xl leading-none">+</span>
+          </summary>
+          <div class="px-5 pb-4 text-gray-700">
+            <p>Read the challenge paper from last year! The <a href="https://arxiv.org/abs/2604.11679" class="text-pink-600 hover:underline" target="_blank">FOMO25 paper</a> summarizes the challenge and includes detailed descriptions of all 19 submitted foundation models from 16 teams. In particular we find:</p>
+            <ul class="list-disc pl-6 mt-2 space-y-1">
+              <li>Self-supervised pretraining improves generalization on clinical data under domain shift, with models trained outside the target domain surpassing supervised baselines trained within-domain.</li>
+              <li>Different pretraining objectives suit different tasks — masked autoencoders favor segmentation while hybrid reconstruction-contrastive methods excel at classification.</li>
+              <li>Smaller pretrained models achieved strong performance, and increasing model size or training duration did not consistently improve results.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="border border-gray-200 rounded-lg">
+          <summary class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
             Am I required to make my code publicly available?
             <span class="text-gray-400 text-xl leading-none">+</span>
           </summary>

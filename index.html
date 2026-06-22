@@ -700,6 +700,77 @@
         <details class="border border-gray-200 rounded-lg">
           <summary
             class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
+            What preprocessing have we applied to the challenge data?
+            <span class="text-gray-400 text-xl leading-none">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-gray-700">
+            <h3 class="font-semibold text-gray-900 mb-1">Pretraining data (FOMO300K)</h3>
+            <p>See the <a href="https://arxiv.org/abs/2506.14432" class="text-pink-600 hover:underline"
+                target="_blank" rel="noopener noreferrer">FOMO300K paper</a> for preprocessing details.</p>
+
+            <h3 class="font-semibold text-gray-900 mt-4 mb-2">Finetuning, validation &amp; test data</h3>
+            <div class="overflow-x-auto -mx-1 px-1">
+              <table class="min-w-full text-sm border-collapse">
+                <thead>
+                  <tr class="border-b border-gray-300 text-left">
+                    <th class="py-2 pr-4 font-semibold text-gray-900 whitespace-nowrap align-bottom">Task</th>
+                    <th class="py-2 pr-4 font-semibold text-gray-900 align-bottom">Finetuning</th>
+                    <th class="py-2 font-semibold text-gray-900 align-bottom">Validation &amp; test</th>
+                  </tr>
+                </thead>
+                <tbody class="align-top">
+                  <tr class="border-b border-gray-200">
+                    <td class="py-2 pr-4 font-medium whitespace-nowrap">Task 1 &mdash; Infarct</td>
+                    <td class="py-2 pr-4">RAS + skull-strip with SynthSeg (FreeSurfer 7.4.1) + coregistration
+                      (FreeSurfer 7.4.1) to the highest-resolution scan.</td>
+                    <td class="py-2">RAS + skull-strip with SynthSeg (FreeSurfer 7.4.1) + coregistration
+                      (FreeSurfer 7.4.1) to the highest-resolution scan.</td>
+                  </tr>
+                  <tr class="border-b border-gray-200">
+                    <td class="py-2 pr-4 font-medium whitespace-nowrap">Task 2 &mdash; Meningioma</td>
+                    <td class="py-2 pr-4">RAS + defacing with mideface (FreeSurfer 7.4.1) + coregistration
+                      (FreeSurfer 7.4.1) to FLAIR.</td>
+                    <td class="py-2">RAS + defacing with mideface (FreeSurfer 7.4.1) + coregistration
+                      (FreeSurfer 7.4.1) to FLAIR.</td>
+                  </tr>
+                  <tr class="border-b border-gray-200">
+                    <td class="py-2 pr-4 font-medium whitespace-nowrap">Task 3 &mdash; Brain Age</td>
+                    <td class="py-2 pr-4"><a href="https://fcon_1000.projects.nitrc.org/indi/retro/sald.html"
+                        class="text-pink-600 hover:underline" target="_blank" rel="noopener noreferrer">Source</a> + RAS +
+                      skull-strip with SynthSeg (FreeSurfer 7.4.1).</td>
+                    <td class="py-2">RAS + skull-strip with SynthSeg (FreeSurfer 7.4.1).</td>
+                  </tr>
+                  <tr class="border-b border-gray-200">
+                    <td class="py-2 pr-4 font-medium whitespace-nowrap">Task 4 &mdash; Trigeminal Neuralgia</td>
+                    <td class="py-2 pr-4"><a href="https://openneuro.org/datasets/ds005713/versions/2.0.2"
+                        class="text-pink-600 hover:underline" target="_blank" rel="noopener noreferrer">Source</a> + RAS</td>
+                    <td class="py-2">None</td>
+                  </tr>
+                  <tr class="border-b border-gray-200">
+                    <td class="py-2 pr-4 font-medium whitespace-nowrap">Task 5 &mdash; Polymicrogyria</td>
+                    <td class="py-2 pr-4"><a
+                        href="https://ruor.uottawa.ca/items/298d789f-e390-43c7-a657-a823701b18b6"
+                        class="text-pink-600 hover:underline" target="_blank" rel="noopener noreferrer">Source</a> + RAS</td>
+                    <td class="py-2">Defacing (pydeface v2.0.2).</td>
+                  </tr>
+                  <tr class="border-b border-gray-200">
+                    <td class="py-2 pr-4 font-medium whitespace-nowrap">Task 6 &mdash; Linear Probing</td>
+                    <td class="py-2 pr-4">No finetuning data.</td>
+                    <td class="py-2">RAS</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 pr-4 font-medium whitespace-nowrap">Task 7 &mdash; Bias &amp; Fairness</td>
+                    <td class="py-2 pr-4">No finetuning data.</td>
+                    <td class="py-2">RAS</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+        <details class="border border-gray-200 rounded-lg">
+          <summary
+            class="cursor-pointer px-5 py-4 text-lg font-semibold text-gray-900 select-none list-none flex justify-between items-center">
             How will you process my models?
             <span class="text-gray-400 text-xl leading-none">+</span>
           </summary>

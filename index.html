@@ -7,6 +7,24 @@
   <title>FOMO26 - Foundation Model Challenge for Brain MRI</title>
   <meta name="description"
     content="FOMO26 at MICCAI 2026: Foundation model challenge for brain MRI with FOMO300K and expanded tasks." />
+  <link rel="canonical" href="https://fomo26.github.io/" />
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FOMO26" />
+  <meta property="og:title" content="FOMO26 - Foundation Model Challenge for Brain MRI" />
+  <meta property="og:description"
+    content="FOMO26 at MICCAI 2026: final challenge results across seven downstream brain MRI tasks." />
+  <meta property="og:url" content="https://fomo26.github.io/" />
+  <meta property="og:image" content="https://fomo26.github.io/images/fomo26.png" />
+  <meta property="og:image:width" content="1320" />
+  <meta property="og:image:height" content="611" />
+  <meta property="og:image:alt" content="Overview of the FOMO26 brain MRI challenge" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FOMO26 - Foundation Model Challenge for Brain MRI" />
+  <meta name="twitter:description"
+    content="Final FOMO26 challenge results across seven downstream brain MRI tasks." />
+  <meta name="twitter:image" content="https://fomo26.github.io/images/fomo26.png" />
+  <meta name="twitter:image:alt" content="Overview of the FOMO26 brain MRI challenge" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <script src="javascript/p5.js"></script>
   <script src="javascript/sketch.js"></script>
@@ -72,6 +90,86 @@
         background-position: 0 50%;
       }
     }
+
+    .results-sparkle-button {
+      background: linear-gradient(110deg, #4f46e5, #7c3aed 45%, #db2777);
+      background-size: 180% 100%;
+      isolation: isolate;
+      overflow: visible;
+      position: relative;
+      transition: box-shadow 180ms ease, filter 180ms ease, transform 180ms ease;
+    }
+
+    .results-sparkle-button::before {
+      background: linear-gradient(110deg, rgba(79, 70, 229, 0.8), rgba(219, 39, 119, 0.8));
+      border-radius: inherit;
+      content: "";
+      filter: blur(13px);
+      inset: -5px;
+      opacity: 0;
+      position: absolute;
+      transition: opacity 180ms ease;
+      z-index: -1;
+    }
+
+    .results-sparkle-button:hover,
+    .results-sparkle-button:focus-visible {
+      animation: results-button-shimmer 900ms ease infinite alternate;
+      box-shadow: 0 12px 28px rgba(124, 58, 237, 0.38);
+      filter: saturate(1.2);
+      transform: translateY(-2px) scale(1.045);
+    }
+
+    .results-sparkle-button:hover::before,
+    .results-sparkle-button:focus-visible::before { opacity: 0.72; }
+
+    .result-sparkle {
+      color: #fbbf24;
+      font-size: 1.05rem;
+      line-height: 1;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      text-shadow: 0 0 7px rgba(255, 255, 255, 0.95);
+      z-index: 2;
+    }
+
+    .results-sparkle-button:hover .result-sparkle,
+    .results-sparkle-button:focus-visible .result-sparkle {
+      animation: result-sparkle-pop 850ms ease-out infinite;
+    }
+
+    .result-sparkle:nth-of-type(1) { left: 10%; top: -12px; --sparkle-x: -9px; --sparkle-y: -13px; }
+    .result-sparkle:nth-of-type(2) { right: 12%; top: -11px; --sparkle-x: 8px; --sparkle-y: -15px; animation-delay: 130ms !important; color: #f9a8d4; }
+    .result-sparkle:nth-of-type(3) { bottom: -12px; left: 21%; --sparkle-x: -7px; --sparkle-y: 13px; animation-delay: 260ms !important; color: #67e8f9; }
+    .result-sparkle:nth-of-type(4) { bottom: -11px; right: 18%; --sparkle-x: 9px; --sparkle-y: 14px; animation-delay: 390ms !important; }
+    .result-sparkle:nth-of-type(5) { left: -15px; top: 35%; --sparkle-x: -13px; --sparkle-y: -4px; animation-delay: 190ms !important; color: #c4b5fd; }
+    .result-sparkle:nth-of-type(6) { right: -15px; top: 28%; --sparkle-x: 14px; --sparkle-y: -5px; animation-delay: 320ms !important; color: #f9a8d4; }
+
+    @keyframes results-button-shimmer {
+      from { background-position: 0 50%; }
+      to { background-position: 100% 50%; }
+    }
+
+    @keyframes result-sparkle-pop {
+      0% { opacity: 0; transform: translate(0, 0) rotate(0) scale(0.2); }
+      35% { opacity: 1; }
+      100% {
+        opacity: 0;
+        transform: translate(var(--sparkle-x), var(--sparkle-y)) rotate(100deg) scale(1.25);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .results-sparkle-button:hover,
+      .results-sparkle-button:focus-visible {
+        animation: none;
+        transform: none;
+      }
+
+      .results-sparkle-button:hover .result-sparkle,
+      .results-sparkle-button:focus-visible .result-sparkle { animation: none; }
+    }
   </style>
 </head>
 
@@ -107,7 +205,7 @@
                   class="block px-4 py-2 text-gray-900 hover:bg-gray-100 rounded-lg">FOMO25</a></li>
             </ul>
           </li>
-          <li><a href="/signup" class="text-pink-600 font-semibold hover:text-pink-700">Sign Up</a></li>
+          <li><a href="/results/" class="text-pink-600 font-semibold hover:text-pink-700">Results</a></li>
         </ul>
       </nav>
 
@@ -128,7 +226,7 @@
             <a href="https://fomo25.github.io" target="_blank" rel="noopener noreferrer"
               class="text-gray-900 hover:text-gray-600 pl-2">FOMO25</a>
           </li>
-          <li><a href="/signup" class="text-pink-600 font-semibold hover:text-pink-700">Sign Up</a></li>
+          <li><a href="/results/" class="text-pink-600 font-semibold hover:text-pink-700">Results</a></li>
         </ul>
       </div>
 
@@ -195,9 +293,15 @@
               src="images/hf-logo-with-title.svg" alt="Hugging Face" class="h-8 w-auto object-contain" /></a>
         </div>
         <div class="flex justify-center items-center flex-wrap mt-4 text-gray-700">
-          <a href="/signup"
-            class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-md shadow transition-colors">
-            Sign Up for FOMO26
+          <a href="/results/"
+            class="results-sparkle-button inline-block text-white font-semibold py-2 px-6 rounded-md shadow">
+            See the Results!
+            <span class="result-sparkle" aria-hidden="true">✦</span>
+            <span class="result-sparkle" aria-hidden="true">✦</span>
+            <span class="result-sparkle" aria-hidden="true">✦</span>
+            <span class="result-sparkle" aria-hidden="true">✦</span>
+            <span class="result-sparkle" aria-hidden="true">✦</span>
+            <span class="result-sparkle" aria-hidden="true">✦</span>
           </a>
         </div>
       </div>
@@ -254,6 +358,14 @@
     <section class="bg-white text-gray-900 max-w-4xl mx-auto px-8 py-12 my-8 rounded-lg shadow-md">
       <h2 class="text-2xl font-bold mb-6">News</h2>
       <div class="mb-6 pb-6 border-b border-gray-200">
+        <h3 class="text-xl font-semibold">FOMO26 Results are Out!</h3>
+        <p class="text-sm text-gray-700">September 4, 2026</p>
+        <p class="mt-2">
+          The final FOMO26 rankings are now available for the Methods and Open tracks across all seven tasks.
+          <a href="/results/" class="text-indigo-600 hover:underline">See the results</a>.
+        </p>
+      </div>
+      <div class="mb-6 pb-6 border-b border-gray-200">
         <h3 class="text-xl font-semibold">Container Validation Available</h3>
         <p class="text-sm text-gray-700">June 24, 2026</p>
         <p class="mt-2">
@@ -276,7 +388,7 @@
         <h3 class="text-xl font-semibold">Signup Is Now Open</h3>
         <p class="text-sm text-gray-700">April 20, 2026</p>
         <p class="mt-2">
-          Registration for FOMO26 is now open! <a href="/signup" class="text-indigo-600 hover:underline">Sign up</a> to
+          Registration for FOMO26 is now open! <a href="/signup.html" class="text-indigo-600 hover:underline">Sign up</a> to
           participate and get access to the pretraining dataset and finetuning data.
         </p>
       </div>
@@ -284,7 +396,7 @@
         <h3 class="text-xl font-semibold">FOMO25 Paper Is now Available</h3>
         <p class="text-sm text-gray-700">April 13, 2026</p>
         <p class="mt-2">The <a href="https://arxiv.org/abs/2604.11679" class="text-indigo-600 hover:underline"
-            target="_blank">FOMO25 paper</a> summarizing the results from last year's challenge is now on arXiv!</p>
+            target="_blank" rel="noopener noreferrer">FOMO25 paper</a> summarizing the results from last year's challenge is now on arXiv!</p>
       </div>
       <div>
         <h3 class="text-xl font-semibold">Announcing FOMO26</h3>
@@ -300,30 +412,35 @@
       <h2 class="text-2xl font-bold text-left mb-8">Timeline</h2>
       <div class="border-l-4 border-pink-700 pl-4">
         <div class="mb-6">
-          <h3 class="text-lg font-bold text-gray-900">April 2026</h3>
-          <p class="text-gray-700">Challenge registration opens. Access to pretraining dataset and finetuning data.
+          <h3 class="text-lg font-bold text-gray-400">April 2026</h3>
+          <p class="text-gray-400">Challenge registration opens. Access to pretraining dataset and finetuning data.
             Public GitHub repo with example pretraining and finetuning code (MAE + U-Net) released.</p>
         </div>
         <div class="mb-6">
-          <h3 class="text-lg font-bold text-gray-900">15 May 2026</h3>
-          <p class="text-gray-700">Sanity-check pipeline on Synapse opens — technical validation to confirm containers
+          <h3 class="text-lg font-bold text-gray-400">15 May 2026</h3>
+          <p class="text-gray-400">Sanity-check pipeline on Synapse opens — technical validation to confirm containers
             are correctly configured.</p>
         </div>
         <div class="mb-6">
-          <h3 class="text-lg font-bold text-gray-900">15 June 2026</h3>
-          <p class="text-gray-700">Validation leaderboard opens. Final submission pipeline opens.</p>
+          <h3 class="text-lg font-bold text-gray-400">15 June 2026</h3>
+          <p class="text-gray-400">Validation leaderboard opens. Final submission pipeline opens.</p>
         </div>
         <div class="mb-6">
-          <h3 class="text-lg font-bold text-gray-900">21 August 2026 — 11:59 PM PST</h3>
-          <p class="text-gray-700">Validation submission deadline.</p>
+          <h3 class="text-lg font-bold text-gray-400">21 August 2026 — 11:59 PM PST</h3>
+          <p class="text-gray-400">Validation submission deadline.</p>
         </div>
         <div class="mb-6">
-          <h3 class="text-lg font-bold text-gray-900">30 August 2026 — 11:59 PM PST</h3>
-          <p class="text-gray-700">Test submission deadline.</p>
+          <h3 class="text-lg font-bold text-gray-400">30 August 2026 — 11:59 PM PST</h3>
+          <p class="text-gray-400">Test submission deadline.</p>
+        </div>
+        <div class="mb-6">
+          <h3 class="text-lg font-bold text-pink-700">4 September 2026</h3>
+          <p class="text-gray-700">Results announced. <a href="/results/"
+              class="text-indigo-600 hover:underline">See the final rankings</a>.</p>
         </div>
         <div>
           <h3 class="text-lg font-bold text-gray-900">MICCAI 2026 — 1 October</h3>
-          <p class="text-gray-700">Results announced. Top teams present their methods.</p>
+          <p class="text-gray-700">Top teams present their methods.</p>
         </div>
       </div>
     </section>
@@ -800,7 +917,7 @@
           </summary>
           <div class="px-5 pb-4 text-gray-700">
             <p>Read the challenge paper from last year! The <a href="https://arxiv.org/abs/2604.11679"
-                class="text-pink-600 hover:underline" target="_blank">FOMO25 paper</a> summarizes the challenge and
+                class="text-pink-600 hover:underline" target="_blank" rel="noopener noreferrer">FOMO25 paper</a> summarizes the challenge and
               includes detailed descriptions of all 19 submitted foundation models from 16 teams. In particular we find:
             </p>
             <ul class="list-disc pl-6 mt-2 space-y-1">
@@ -827,13 +944,19 @@
     </section>
 
     <section class="bg-white text-gray-900 max-w-4xl mx-auto px-8 py-12 my-8 rounded-lg shadow-md text-center">
-      <h2 class="text-3xl font-bold mb-6 text-gray-900">Join the Challenge</h2>
+      <h2 class="text-3xl font-bold mb-6 text-gray-900">FOMO26 Challenge Results</h2>
       <p class="text-gray-700 mb-6">
-        Interested in participating, sponsoring, or collaborating? Sign up now to get notified and secure your spot.
+        Explore the final rankings for both tracks and compare performance across all seven tasks.
       </p>
-      <a href="/signup"
-        class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-md shadow transition-colors">
-        Sign Up for FOMO26
+      <a href="/results/"
+        class="results-sparkle-button inline-block text-white font-semibold py-2 px-6 rounded-md shadow">
+        See the Results!
+        <span class="result-sparkle" aria-hidden="true">✦</span>
+        <span class="result-sparkle" aria-hidden="true">✦</span>
+        <span class="result-sparkle" aria-hidden="true">✦</span>
+        <span class="result-sparkle" aria-hidden="true">✦</span>
+        <span class="result-sparkle" aria-hidden="true">✦</span>
+        <span class="result-sparkle" aria-hidden="true">✦</span>
       </a>
       <p class="text-gray-500 mt-6">Or contact us at <a href="mailto:fomo26@di.ku.dk"
           class="text-pink-600 hover:underline">fomo26@di.ku.dk</a></p>

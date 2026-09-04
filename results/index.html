@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Results - FOMO26 - Foundation Model Challenge for Brain MRI</title>
+  <meta name="description"
+    content="Final FOMO26 challenge rankings and task scores for the Methods and Open tracks." />
+  <link rel="canonical" href="https://fomo26.github.io/results/" />
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FOMO26" />
+  <meta property="og:title" content="FOMO26 Results" />
+  <meta property="og:description"
+    content="Final FOMO26 challenge rankings and task scores for the Methods and Open tracks." />
+  <meta property="og:url" content="https://fomo26.github.io/results/" />
+  <meta property="og:image" content="https://fomo26.github.io/images/fomo26.png" />
+  <meta property="og:image:width" content="1320" />
+  <meta property="og:image:height" content="611" />
+  <meta property="og:image:alt" content="Overview of the FOMO26 brain MRI challenge" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FOMO26 Results" />
+  <meta name="twitter:description"
+    content="Final FOMO26 challenge rankings and task scores for the Methods and Open tracks." />
+  <meta name="twitter:image" content="https://fomo26.github.io/images/fomo26.png" />
+  <meta name="twitter:image:alt" content="Overview of the FOMO26 brain MRI challenge" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+  <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script defer src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script defer src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <style>
+    .logo-fomo {
+      background: linear-gradient(to right, #2563eb, #db2777);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-26 { color: #db2777; }
+
+    .logo-link {
+      transition: filter 0.3s ease;
+      will-change: filter;
+      transform: translateZ(0);
+    }
+
+    .logo-link:hover { filter: drop-shadow(0 0 10px rgba(219, 39, 119, 0.65)); }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main { flex: 1; }
+
+    .confetti-layer {
+      height: 100%;
+      inset: 0;
+      pointer-events: none;
+      position: fixed;
+      width: 100%;
+      z-index: 60;
+    }
+
+    .rank-1 {
+      background-color: #fff7d6 !important;
+      border-left: 4px solid #d4a72c;
+      font-weight: 600;
+    }
+
+    .rank-2 {
+      background-color: #f1f3f5 !important;
+      border-left: 4px solid #9ca3af;
+      font-weight: 500;
+    }
+
+    .rank-3 {
+      background-color: #f7e3d2 !important;
+      border-left: 4px solid #b87333;
+      font-weight: 500;
+    }
+
+    .rank-1 .placement-column { color: #8a6500 !important; }
+    .rank-2 .placement-column { color: #626971 !important; }
+    .rank-3 .placement-column { color: #8f4f20 !important; }
+
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    table.results-table,
+    table.results-table.dataTable {
+      border: 1px solid #dee2e6;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+      margin: 0 auto !important;
+      min-width: 100%;
+      width: max-content !important;
+      white-space: nowrap;
+    }
+
+    table.results-table thead th,
+    table.results-table.dataTable thead th {
+      background-color: #ffffff !important;
+      border-bottom: 1px solid #dee2e6 !important;
+      border-right: 1px solid #dee2e6 !important;
+      color: #495057 !important;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      padding: 0.65rem 0.55rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    table.results-table thead tr:last-child th,
+    table.results-table.dataTable thead tr:last-child th {
+      border-bottom: 2px solid #dee2e6 !important;
+    }
+
+    table.results-table [data-group-header],
+    table.results-table.dataTable [data-group-header] {
+      line-height: 1.15;
+      white-space: normal;
+    }
+
+    table.results-table.ranks-only .task-title-long,
+    table.results-table.dataTable.ranks-only .task-title-long { display: none; }
+
+    table.results-table tbody td,
+    table.results-table.dataTable tbody td {
+      border-bottom: 1px solid #dee2e6;
+      color: #495057;
+      padding: 0.5rem 0.55rem;
+      text-align: right;
+    }
+
+    table.results-table .text-column,
+    table.results-table.dataTable .text-column { text-align: left; }
+
+    table.results-table .placement-column,
+    table.results-table.dataTable .placement-column { text-align: center; }
+
+    table.results-table.overall-view,
+    table.results-table.dataTable.overall-view {
+      min-width: 100% !important;
+      width: 100% !important;
+    }
+
+    .column-hidden { display: none !important; }
+
+    .filter-button {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 9999px;
+      color: #475569;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1.25rem;
+      padding: 0.45rem 0.85rem;
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+
+    .filter-button:hover { border-color: #6366f1; color: #4338ca; }
+
+    .filter-button:focus-visible {
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+      outline: none;
+    }
+
+    .filter-button[aria-pressed="true"] {
+      background: #4f46e5;
+      border-color: #4f46e5;
+      color: #ffffff;
+    }
+
+    .filter-button.utility-filter[aria-pressed="true"] {
+      background: #1f2937;
+      border-color: #1f2937;
+    }
+
+    .filter-button.view-button {
+      border-color: #f0abfc;
+      color: #a21caf;
+    }
+
+    .filter-button.view-button:hover {
+      border-color: #c026d3;
+      color: #86198f;
+    }
+
+    .filter-button.view-button[aria-pressed="true"] {
+      background: #c026d3;
+      border-color: #c026d3;
+      color: #ffffff;
+    }
+
+    .dataTables_wrapper { color: #495057; font-size: 0.8125rem; }
+
+    @media (max-width: 768px) {
+      table.results-table,
+      table.results-table.dataTable { min-width: 720px; }
+
+      table.results-table thead th,
+      table.results-table tbody td,
+      table.results-table.dataTable thead th,
+      table.results-table.dataTable tbody td { min-width: 78px; }
+
+      table.results-table .text-column,
+      table.results-table.dataTable .text-column { min-width: 140px; }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900 overflow-x-hidden">
+  <header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
+      <h1 class="text-3xl font-bold tracking-tight"><a href="/" class="logo-link" title="FOMO26 home"><span
+            class="logo-fomo">FOMO</span><span class="logo-26">26</span></a></h1>
+
+      <button id="menu-toggle" class="focus:outline-none block md:hidden" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <nav class="hidden md:block" aria-label="Main navigation">
+        <ul class="flex space-x-4 justify-center items-center">
+          <li><a href="/#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
+          <li><a href="/#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
+          <li><a href="/#rules" class="text-gray-900 hover:text-gray-600">Rules</a></li>
+          <li><a href="/#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
+          <li class="relative">
+            <button id="editions-toggle" type="button"
+              onclick="document.getElementById('editions-menu').classList.toggle('hidden')"
+              class="text-gray-900 hover:text-gray-600 flex items-center gap-1" aria-haspopup="true">
+              Previous editions
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul id="editions-menu"
+              class="hidden absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <li><a href="https://fomo25.github.io" target="_blank" rel="noopener noreferrer"
+                  class="block px-4 py-2 text-gray-900 hover:bg-gray-100 rounded-lg">FOMO25</a></li>
+            </ul>
+          </li>
+          <li><a href="/results/" aria-current="page"
+              class="text-pink-600 font-semibold hover:text-pink-700">Results</a></li>
+        </ul>
+      </nav>
+
+      <div id="mobile-menu"
+        class="fixed top-0 left-0 h-full w-64 bg-white shadow transform -translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden p-6">
+        <button id="close-menu" class="mb-4 focus:outline-none" aria-label="Close menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        <ul class="flex flex-col space-y-4">
+          <li><a href="/#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
+          <li><a href="/#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
+          <li><a href="/#rules" class="text-gray-900 hover:text-gray-600">Rules</a></li>
+          <li><a href="/#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
+          <li>
+            <p class="text-gray-500 text-sm font-medium mb-1">Previous editions</p>
+            <a href="https://fomo25.github.io" target="_blank" rel="noopener noreferrer"
+              class="text-gray-900 hover:text-gray-600 pl-2">FOMO25</a>
+          </li>
+          <li><a href="/results/" aria-current="page"
+              class="text-pink-600 font-semibold hover:text-pink-700">Results</a></li>
+        </ul>
+      </div>
+
+      <a href="https://conferences.miccai.org/2026/en/" target="_blank" rel="noopener noreferrer">
+        <img src="/images/miccai.png" alt="MICCAI Logo" class="h-12 w-auto object-contain" />
+      </a>
+    </div>
+  </header>
+
+  <main class="pb-12">
+    <section class="bg-white text-gray-900 max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-16 my-8 rounded-lg shadow-md">
+      <h1 class="text-3xl font-extrabold text-gray-900 mb-5">Results</h1>
+      <p class="text-gray-700 max-w-4xl mb-4">
+        We are pleased to present the final results of the FOMO26 Challenge. The tables include every ranked team in
+        Track 1 (Methods) and Track 2 (Open) across all seven downstream tasks.
+      </p>
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 text-sm text-gray-700 max-w-5xl mb-7">
+        <p><span class="font-semibold text-gray-900">Ranking:</span> Lower ranks are better. The weighted average uses
+          25% each for Tasks 2 and 4, and 10% each for Tasks 1, 3, 5, 6, and 7.</p>
+        <p class="mt-2">Teams with the same weighted average share a placement; subsequent placements follow standard
+          competition ranking. For multi-metric tasks, the task rank is the average of the metric-specific ranks. A dash indicates no
+          valid submission for the task.</p>
+      </div>
+
+      <section aria-labelledby="methods-heading">
+        <h2 id="methods-heading" class="text-2xl font-bold text-gray-900 mb-2">Track 1: Methods</h2>
+        <p class="text-sm text-gray-600 mb-4">Models pretrained on FOMO300k.</p>
+        <div class="mb-5" data-controls-for="methodResults">
+          <div class="flex flex-wrap gap-2" role="group" aria-label="Choose visible Methods track columns">
+            <button type="button" class="filter-button utility-filter" data-action="all" aria-pressed="true"
+              aria-controls="methodResults">All tasks</button>
+            <button type="button" class="filter-button utility-filter" data-action="overall" aria-pressed="false"
+              aria-controls="methodResults">Overall only</button>
+            <button type="button" class="filter-button" data-task="task-1" aria-pressed="true"
+              aria-controls="methodResults">Task 1</button>
+            <button type="button" class="filter-button" data-task="task-2" aria-pressed="true"
+              aria-controls="methodResults">Task 2</button>
+            <button type="button" class="filter-button" data-task="task-3" aria-pressed="true"
+              aria-controls="methodResults">Task 3</button>
+            <button type="button" class="filter-button" data-task="task-4" aria-pressed="true"
+              aria-controls="methodResults">Task 4</button>
+            <button type="button" class="filter-button" data-task="task-5" aria-pressed="true"
+              aria-controls="methodResults">Task 5</button>
+            <button type="button" class="filter-button" data-task="task-67" aria-pressed="true"
+              aria-controls="methodResults">Tasks 6–7</button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 mt-3" role="group" aria-label="Choose Methods track detail">
+            <span class="text-sm font-semibold text-gray-700 mr-1">Metric detail</span>
+            <button type="button" class="filter-button view-button" data-metric-mode="ranks" aria-pressed="true"
+              aria-controls="methodResults">Ranks only</button>
+            <button type="button" class="filter-button view-button" data-metric-mode="all" aria-pressed="false"
+              aria-controls="methodResults">All metrics</button>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table id="methodResults" class="results-table">
+            <caption class="sr-only">FOMO26 Methods track results</caption>
+            <thead>
+              <tr>
+                <th rowspan="2" class="placement-column">Placement</th>
+                <th rowspan="2" class="text-column">Team</th>
+                <th rowspan="2">Weighted<br>Average Rank</th>
+                <th colspan="2" class="task-1" data-group-header="task-1" data-all-colspan="2"
+                  data-rank-colspan="1"><span>Task 1</span><span class="task-title-long">:<br>Infarct Classification</span></th>
+                <th colspan="3" class="task-2" data-group-header="task-2" data-all-colspan="3"
+                  data-rank-colspan="1"><span>Task 2</span><span class="task-title-long">:<br>Meningioma Segmentation</span></th>
+                <th colspan="3" class="task-3" data-group-header="task-3" data-all-colspan="3"
+                  data-rank-colspan="1"><span>Task 3</span><span class="task-title-long">:<br>Brain Age Estimation</span></th>
+                <th colspan="3" class="task-4" data-group-header="task-4" data-all-colspan="3"
+                  data-rank-colspan="1"><span>Task 4</span><span class="task-title-long">:<br>Trigeminal Neuralgia Segmentation</span></th>
+                <th colspan="2" class="task-5" data-group-header="task-5" data-all-colspan="2"
+                  data-rank-colspan="1"><span>Task 5</span><span class="task-title-long">:<br>Polymicrogyria Classification</span></th>
+                <th colspan="7" class="task-67" data-group-header="task-67" data-all-colspan="7"
+                  data-rank-colspan="3"><span>Tasks 6–7</span><span class="task-title-long">:<br>Representation and Fairness</span></th>
+              </tr>
+              <tr>
+                <th class="task-1">Rank</th><th class="task-1 metric-column">AUROC</th>
+                <th class="task-2">Rank</th><th class="task-2 metric-column">Dice</th><th class="task-2 metric-column">NSD</th>
+                <th class="task-3">Rank</th><th class="task-3 metric-column">Correlation</th><th class="task-3 metric-column">MAE</th>
+                <th class="task-4">Rank</th><th class="task-4 metric-column">Dice</th><th class="task-4 metric-column">NSD</th>
+                <th class="task-5">Rank</th><th class="task-5 metric-column">AUROC</th>
+                <th class="task-67">Combined Rank</th><th class="task-67">Task 6 Rank</th>
+                <th class="task-67 metric-column">OvR F1</th><th class="task-67 metric-column">OvR AUROC</th>
+                <th class="task-67">Task 7 Rank</th><th class="task-67 metric-column">Fairness F1</th>
+                <th class="task-67 metric-column">Fairness AUROC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="rank-1">
+                <td class="placement-column" data-order="1">1</td>
+                <td class="text-column">BAIA-BrainFM</td>
+                <td data-order="6.175">6.175</td>
+                <td class="task-1" data-order="1">1</td><td class="task-1" data-order="0.799766">0.800</td>
+                <td class="task-2" data-order="8">8</td><td class="task-2" data-order="0.153765">0.154</td><td class="task-2" data-order="0.146154">0.146</td>
+                <td class="task-3" data-order="3">3</td><td class="task-3" data-order="0.700845">0.701</td><td class="task-3" data-order="10.127605">10.13</td>
+                <td class="task-4" data-order="2.5">2.5</td><td class="task-4" data-order="0.421799">0.422</td><td class="task-4" data-order="0.646196">0.646</td>
+                <td class="task-5" data-order="2">2</td><td class="task-5" data-order="0.7604858299595142">0.760</td>
+                <td class="task-67" data-order="14.75">14.75</td><td class="task-67" data-order="10">10</td><td class="task-67" data-order="0.441623">0.442</td><td class="task-67" data-order="0.670204">0.670</td>
+                <td class="task-67" data-order="19.5">19.5</td><td class="task-67" data-order="0.930197">0.930</td><td class="task-67" data-order="0.918151">0.918</td>
+              </tr>
+              <tr class="rank-2">
+                <td class="placement-column" data-order="2">2</td>
+                <td class="text-column">BrainAI</td>
+                <td data-order="8.15">8.15</td>
+                <td class="task-1" data-order="8">8</td><td class="task-1" data-order="0.745273">0.745</td>
+                <td class="task-2" data-order="1">1</td><td class="task-2" data-order="0.279771">0.280</td><td class="task-2" data-order="0.223994">0.224</td>
+                <td class="task-3" data-order="15">15</td><td class="task-3" data-order="0.533931">0.534</td><td class="task-3" data-order="13.214139">13.21</td>
+                <td class="task-4" data-order="3">3</td><td class="task-4" data-order="0.41726">0.417</td><td class="task-4" data-order="0.657499">0.657</td>
+                <td class="task-5" data-order="20">20</td><td class="task-5" data-order="0.5357085020242915">0.536</td>
+                <td class="task-67" data-order="14.25">14.25</td><td class="task-67" data-order="6.5">6.5</td><td class="task-67" data-order="0.523568">0.524</td><td class="task-67" data-order="0.666842">0.667</td>
+                <td class="task-67" data-order="22">22</td><td class="task-67" data-order="0.909574">0.910</td><td class="task-67" data-order="0.923937">0.924</td>
+              </tr>
+              <tr class="rank-3">
+                <td class="placement-column" data-order="3">3</td>
+                <td class="text-column">FariaTeam</td>
+                <td data-order="8.95">8.95</td>
+                <td class="task-1" data-order="2">2</td><td class="task-1" data-order="0.795488">0.795</td>
+                <td class="task-2" data-order="10.5">10.5</td><td class="task-2" data-order="0.135566">0.136</td><td class="task-2" data-order="0.115867">0.116</td>
+                <td class="task-3" data-order="1">1</td><td class="task-3" data-order="0.761613">0.762</td><td class="task-3" data-order="8.596875">8.60</td>
+                <td class="task-4" data-order="3.5">3.5</td><td class="task-4" data-order="0.419955">0.420</td><td class="task-4" data-order="0.634977">0.635</td>
+                <td class="task-5" data-order="11">11</td><td class="task-5" data-order="0.570850202429149">0.571</td>
+                <td class="task-67" data-order="20.25">20.25</td><td class="task-67" data-order="10">10</td><td class="task-67" data-order="0.479561">0.480</td><td class="task-67" data-order="0.646645">0.647</td>
+                <td class="task-67" data-order="30.5">30.5</td><td class="task-67" data-order="0.909109">0.909</td><td class="task-67" data-order="0.900807">0.901</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="4">4</td>
+                <td class="text-column">Azmuth</td>
+                <td data-order="9.25">9.25</td>
+                <td class="task-1" data-order="3">3</td><td class="task-1" data-order="0.794844">0.795</td>
+                <td class="task-2" data-order="5.5">5.5</td><td class="task-2" data-order="0.176705">0.177</td><td class="task-2" data-order="0.150748">0.151</td>
+                <td class="task-3" data-order="16">16</td><td class="task-3" data-order="0.385309">0.385</td><td class="task-3" data-order="12.00059">12.00</td>
+                <td class="task-4" data-order="10.5">10.5</td><td class="task-4" data-order="0.254335">0.254</td><td class="task-4" data-order="0.469383">0.469</td>
+                <td class="task-5" data-order="6">6</td><td class="task-5" data-order="0.6639676113360323">0.664</td>
+                <td class="task-67" data-order="13.75">13.75</td><td class="task-67" data-order="19">19</td><td class="task-67" data-order="0.384578">0.385</td><td class="task-67" data-order="0.605746">0.606</td>
+                <td class="task-67" data-order="8.5">8.5</td><td class="task-67" data-order="0.945955">0.946</td><td class="task-67" data-order="0.926898">0.927</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="5">5</td>
+                <td class="text-column">MAIL_WashU</td>
+                <td data-order="11.275">11.275</td>
+                <td class="task-1" data-order="9">9</td><td class="task-1" data-order="0.744336">0.744</td>
+                <td class="task-2" data-order="4">4</td><td class="task-2" data-order="0.185624">0.186</td><td class="task-2" data-order="0.160468">0.160</td>
+                <td class="task-3" data-order="13">13</td><td class="task-3" data-order="0.48144">0.481</td><td class="task-3" data-order="10.709229">10.71</td>
+                <td class="task-4" data-order="16.5">16.5</td><td class="task-4" data-order="0.150082">0.150</td><td class="task-4" data-order="0.242956">0.243</td>
+                <td class="task-5" data-order="3">3</td><td class="task-5" data-order="0.7510931174089068">0.751</td>
+                <td class="task-67" data-order="18.25">18.25</td><td class="task-67" data-order="29">29</td><td class="task-67" data-order="0.30118">0.301</td><td class="task-67" data-order="0.519773">0.520</td>
+                <td class="task-67" data-order="7.5">7.5</td><td class="task-67" data-order="0.947719">0.948</td><td class="task-67" data-order="0.928887">0.929</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="6">6</td>
+                <td class="text-column">CVMAIL_VinUni</td>
+                <td data-order="11.375">11.375</td>
+                <td class="task-1" data-order="4">4</td><td class="task-1" data-order="0.778203">0.778</td>
+                <td class="task-2" data-order="19">19</td><td class="task-2" data-order="0.093486">0.093</td><td class="task-2" data-order="0.072717">0.073</td>
+                <td class="task-3" data-order="4.5">4.5</td><td class="task-3" data-order="0.674719">0.675</td><td class="task-3" data-order="10.152444">10.15</td>
+                <td class="task-4" data-order="5.5">5.5</td><td class="task-4" data-order="0.397541">0.398</td><td class="task-4" data-order="0.630064">0.630</td>
+                <td class="task-5" data-order="10">10</td><td class="task-5" data-order="0.577246963562753">0.577</td>
+                <td class="task-67" data-order="17">17</td><td class="task-67" data-order="13.5">13.5</td><td class="task-67" data-order="0.468052">0.468</td><td class="task-67" data-order="0.618483">0.618</td>
+                <td class="task-67" data-order="20.5">20.5</td><td class="task-67" data-order="0.917301">0.917</td><td class="task-67" data-order="0.923509">0.924</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="7">7</td>
+                <td class="text-column">FOMOHINT</td>
+                <td data-order="11.8">11.8</td>
+                <td class="task-1" data-order="6">6</td><td class="task-1" data-order="0.765742">0.766</td>
+                <td class="task-2" data-order="13">13</td><td class="task-2" data-order="0.127162">0.127</td><td class="task-2" data-order="0.089677">0.090</td>
+                <td class="task-3" data-order="9.5">9.5</td><td class="task-3" data-order="0.538679">0.539</td><td class="task-3" data-order="10.561007">10.56</td>
+                <td class="task-4" data-order="1">1</td><td class="task-4" data-order="0.447478">0.447</td><td class="task-4" data-order="0.679426">0.679</td>
+                <td class="task-5" data-order="24">24</td><td class="task-5" data-order="0.5125506072874493">0.513</td>
+                <td class="task-67" data-order="21.75">21.75</td><td class="task-67" data-order="26">26</td><td class="task-67" data-order="0.325577">0.326</td><td class="task-67" data-order="0.557119">0.557</td>
+                <td class="task-67" data-order="17.5">17.5</td><td class="task-67" data-order="0.948441">0.948</td><td class="task-67" data-order="0.899508">0.900</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="8">8</td>
+                <td class="text-column">NVBrain</td>
+                <td data-order="12.4">12.4</td>
+                <td class="task-1" data-order="17">17</td><td class="task-1" data-order="0.693555">0.694</td>
+                <td class="task-2" data-order="9">9</td><td class="task-2" data-order="0.140777">0.141</td><td class="task-2" data-order="0.116092">0.116</td>
+                <td class="task-3" data-order="11">11</td><td class="task-3" data-order="0.652999">0.653</td><td class="task-3" data-order="12.394353">12.39</td>
+                <td class="task-4" data-order="7">7</td><td class="task-4" data-order="0.37329">0.373</td><td class="task-4" data-order="0.617098">0.617</td>
+                <td class="task-5" data-order="12">12</td><td class="task-5" data-order="0.5680971659919029">0.568</td>
+                <td class="task-67" data-order="22">22</td><td class="task-67" data-order="30.5">30.5</td><td class="task-67" data-order="0.294255">0.294</td><td class="task-67" data-order="0.495187">0.495</td>
+                <td class="task-67" data-order="13.5">13.5</td><td class="task-67" data-order="0.935341">0.935</td><td class="task-67" data-order="0.924424">0.924</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="9">9</td>
+                <td class="text-column">BrainRep</td>
+                <td data-order="12.45">12.45</td>
+                <td class="task-1" data-order="13">13</td><td class="task-1" data-order="0.711758">0.712</td>
+                <td class="task-2" data-order="3.5">3.5</td><td class="task-2" data-order="0.204534">0.205</td><td class="task-2" data-order="0.16033">0.160</td>
+                <td class="task-3" data-order="9.5">9.5</td><td class="task-3" data-order="0.569426">0.569</td><td class="task-3" data-order="11.306246">11.31</td>
+                <td class="task-4" data-order="16.5">16.5</td><td class="task-4" data-order="0.141372">0.141</td><td class="task-4" data-order="0.264093">0.264</td>
+                <td class="task-5" data-order="26">26</td><td class="task-5" data-order="0.5015384615384615">0.502</td>
+                <td class="task-67" data-order="13">13</td><td class="task-67" data-order="17">17</td><td class="task-67" data-order="0.392072">0.392</td><td class="task-67" data-order="0.625508">0.626</td>
+                <td class="task-67" data-order="9">9</td><td class="task-67" data-order="0.934731">0.935</td><td class="task-67" data-order="0.945658">0.946</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="10">10</td>
+                <td class="text-column">McGill_PVG</td>
+                <td data-order="13.975">13.975</td>
+                <td class="task-1" data-order="11">11</td><td class="task-1" data-order="0.730801">0.731</td>
+                <td class="task-2" data-order="22">22</td><td class="task-2" data-order="0.086911">0.087</td><td class="task-2" data-order="0.053942">0.054</td>
+                <td class="task-3" data-order="3">3</td><td class="task-3" data-order="0.692772">0.693</td><td class="task-3" data-order="9.9705">9.97</td>
+                <td class="task-4" data-order="12.5">12.5</td><td class="task-4" data-order="0.22277">0.223</td><td class="task-4" data-order="0.360527">0.361</td>
+                <td class="task-5" data-order="5">5</td><td class="task-5" data-order="0.6906072874493927">0.691</td>
+                <td class="task-67" data-order="17.25">17.25</td><td class="task-67" data-order="20.5">20.5</td><td class="task-67" data-order="0.368459">0.368</td><td class="task-67" data-order="0.592161">0.592</td>
+                <td class="task-67" data-order="14">14</td><td class="task-67" data-order="0.914606">0.915</td><td class="task-67" data-order="0.94815">0.948</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="11">11</td>
+                <td class="text-column">Sigma_Alpha</td>
+                <td data-order="14.225">14.225</td>
+                <td class="task-1" data-order="7">7</td><td class="task-1" data-order="0.758906">0.759</td>
+                <td class="task-2" data-order="15.5">15.5</td><td class="task-2" data-order="0.110674">0.111</td><td class="task-2" data-order="0.077046">0.077</td>
+                <td class="task-3" data-order="16.5">16.5</td><td class="task-3" data-order="0.527222">0.527</td><td class="task-3" data-order="13.448724">13.45</td>
+                <td class="task-4" data-order="22">22</td><td class="task-4" data-order="0.066715">0.067</td><td class="task-4" data-order="0.158073">0.158</td>
+                <td class="task-5" data-order="16">16</td><td class="task-5" data-order="0.556275303643724">0.556</td>
+                <td class="task-67" data-order="4.5">4.5</td><td class="task-67" data-order="2.5">2.5</td><td class="task-67" data-order="0.556701">0.557</td><td class="task-67" data-order="0.718926">0.719</td>
+                <td class="task-67" data-order="6.5">6.5</td><td class="task-67" data-order="0.941512">0.942</td><td class="task-67" data-order="0.940599">0.941</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="12">12</td>
+                <td class="text-column">Bonny</td>
+                <td data-order="14.325">14.325</td>
+                <td class="task-1" data-order="22">22</td><td class="task-1" data-order="0.662422">0.662</td>
+                <td class="task-2" data-order="22">22</td><td class="task-2" data-order="0.079146">0.079</td><td class="task-2" data-order="0.070532">0.071</td>
+                <td class="task-3" data-order="13.5">13.5</td><td class="task-3" data-order="0.555553">0.556</td><td class="task-3" data-order="13.041525">13.04</td>
+                <td class="task-4" data-order="10.5">10.5</td><td class="task-4" data-order="0.264409">0.264</td><td class="task-4" data-order="0.426252">0.426</td>
+                <td class="task-5" data-order="7">7</td><td class="task-5" data-order="0.5877732793522268">0.588</td>
+                <td class="task-67" data-order="9.75">9.75</td><td class="task-67" data-order="13.5">13.5</td><td class="task-67" data-order="0.429765">0.430</td><td class="task-67" data-order="0.628525">0.629</td>
+                <td class="task-67" data-order="6">6</td><td class="task-67" data-order="0.951758">0.952</td><td class="task-67" data-order="0.931459">0.931</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="13">13</td>
+                <td class="text-column">LST-FE</td>
+                <td data-order="14.725">14.725</td>
+                <td class="task-1" data-order="18">18</td><td class="task-1" data-order="0.682852">0.683</td>
+                <td class="task-2" data-order="16.5">16.5</td><td class="task-2" data-order="0.100046">0.100</td><td class="task-2" data-order="0.078708">0.079</td>
+                <td class="task-3" data-order="7.5">7.5</td><td class="task-3" data-order="0.568808">0.569</td><td class="task-3" data-order="10.29205">10.29</td>
+                <td class="task-4" data-order="24">24</td><td class="task-4" data-order="0.059703">0.060</td><td class="task-4" data-order="0.102694">0.103</td>
+                <td class="task-5" data-order="4">4</td><td class="task-5" data-order="0.6936842105263159">0.694</td>
+                <td class="task-67" data-order="8.25">8.25</td><td class="task-67" data-order="4.5">4.5</td><td class="task-67" data-order="0.512154">0.512</td><td class="task-67" data-order="0.721738">0.722</td>
+                <td class="task-67" data-order="12">12</td><td class="task-67" data-order="0.925648">0.926</td><td class="task-67" data-order="0.934995">0.935</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="14">14</td>
+                <td class="text-column">Dolphins_creators</td>
+                <td data-order="15.175">15.175</td>
+                <td class="task-1" data-order="16">16</td><td class="task-1" data-order="0.700586">0.701</td>
+                <td class="task-2" data-order="10.5">10.5</td><td class="task-2" data-order="0.136998">0.137</td><td class="task-2" data-order="0.114979">0.115</td>
+                <td class="task-3" data-order="28">28</td><td class="task-3" data-order="0.029393">0.029</td><td class="task-3" data-order="14.412578">14.41</td>
+                <td class="task-4" data-order="9">9</td><td class="task-4" data-order="0.273265">0.273</td><td class="task-4" data-order="0.485936">0.486</td>
+                <td class="task-5" data-order="21">21</td><td class="task-5" data-order="0.5334412955465587">0.533</td>
+                <td class="task-67" data-order="19">19</td><td class="task-67" data-order="30.5">30.5</td><td class="task-67" data-order="0.291464">0.291</td><td class="task-67" data-order="0.518455">0.518</td>
+                <td class="task-67" data-order="7.5">7.5</td><td class="task-67" data-order="0.944965">0.945</td><td class="task-67" data-order="0.933662">0.934</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="15">15</td>
+                <td class="text-column">fomoTNT</td>
+                <td data-order="15.275">15.275</td>
+                <td class="task-1" data-order="30">30</td><td class="task-1" data-order="0.514687">0.515</td>
+                <td class="task-2" data-order="6.5">6.5</td><td class="task-2" data-order="0.167609">0.168</td><td class="task-2" data-order="0.150609">0.151</td>
+                <td class="task-3" data-order="21">21</td><td class="task-3" data-order="0.178659">0.179</td><td class="task-3" data-order="11.721692">11.72</td>
+                <td class="task-4" data-order="8">8</td><td class="task-4" data-order="0.336754">0.337</td><td class="task-4" data-order="0.54122">0.541</td>
+                <td class="task-5" data-order="29">29</td><td class="task-5" data-order="0.47465587044534413">0.475</td>
+                <td class="task-67" data-order="18.25">18.25</td><td class="task-67" data-order="26.5">26.5</td><td class="task-67" data-order="0.341096">0.341</td><td class="task-67" data-order="0.543949">0.544</td>
+                <td class="task-67" data-order="10">10</td><td class="task-67" data-order="0.934971">0.935</td><td class="task-67" data-order="0.934666">0.935</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="16">16</td>
+                <td class="text-column">walnut preview</td>
+                <td data-order="15.625">15.625</td>
+                <td class="task-1" data-order="12">12</td><td class="task-1" data-order="0.713594">0.714</td>
+                <td class="task-2" data-order="7.5">7.5</td><td class="task-2" data-order="0.197216">0.197</td><td class="task-2" data-order="0.102356">0.102</td>
+                <td class="task-3" data-order="25.5">25.5</td><td class="task-3" data-order="0.217282">0.217</td><td class="task-3" data-order="14.400309">14.40</td>
+                <td class="task-4" data-order="30">30</td><td class="task-4" data-order="0.001549">0.002</td><td class="task-4" data-order="0.005397">0.005</td>
+                <td class="task-5" data-order="1">1</td><td class="task-5" data-order="0.7889878542510121">0.789</td>
+                <td class="task-67" data-order="12">12</td><td class="task-67" data-order="1">1</td><td class="task-67" data-order="0.5931435702">0.593</td><td class="task-67" data-order="0.7310574894">0.731</td>
+                <td class="task-67" data-order="23">23</td><td class="task-67" data-order="0.9216351571">0.922</td><td class="task-67" data-order="0.9154486151">0.915</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="17">17</td>
+                <td class="text-column">Mind_lab</td>
+                <td data-order="15.725">15.725</td>
+                <td class="task-1" data-order="21">21</td><td class="task-1" data-order="0.676895">0.677</td>
+                <td class="task-2" data-order="2">2</td><td class="task-2" data-order="0.239811">0.240</td><td class="task-2" data-order="0.176509">0.177</td>
+                <td class="task-3" data-order="29">29</td><td class="task-3" data-order="0.248428">0.248</td><td class="task-3" data-order="28.499075">28.50</td>
+                <td class="task-4" data-order="19.5">19.5</td><td class="task-4" data-order="0.102121">0.102</td><td class="task-4" data-order="0.21701">0.217</td>
+                <td class="task-5" data-order="13">13</td><td class="task-5" data-order="0.5643724696356276">0.564</td>
+                <td class="task-67" data-order="20.25">20.25</td><td class="task-67" data-order="20.5">20.5</td><td class="task-67" data-order="0.394954">0.395</td><td class="task-67" data-order="0.559189">0.559</td>
+                <td class="task-67" data-order="20">20</td><td class="task-67" data-order="0.92433">0.924</td><td class="task-67" data-order="0.921238">0.921</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="18">18</td>
+                <td class="text-column">HQLearning</td>
+                <td data-order="15.825">15.825</td>
+                <td class="task-1" data-order="10">10</td><td class="task-1" data-order="0.740273">0.740</td>
+                <td class="task-2" data-order="18">18</td><td class="task-2" data-order="0.082573">0.083</td><td class="task-2" data-order="0.079465">0.079</td>
+                <td class="task-3" data-order="28">28</td><td class="task-3" data-order="0.169769">0.170</td><td class="task-3" data-order="14.759915">14.76</td>
+                <td class="task-4" data-order="5.5">5.5</td><td class="task-4" data-order="0.409804">0.410</td><td class="task-4" data-order="0.619565">0.620</td>
+                <td class="task-5" data-order="19">19</td><td class="task-5" data-order="0.5394331983805669">0.539</td>
+                <td class="task-67" data-order="21.25">21.25</td><td class="task-67" data-order="25.5">25.5</td><td class="task-67" data-order="0.368083">0.368</td><td class="task-67" data-order="0.52958">0.530</td>
+                <td class="task-67" data-order="17">17</td><td class="task-67" data-order="0.936234">0.936</td><td class="task-67" data-order="0.917865">0.918</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="19">19</td>
+                <td class="text-column">buckeye-fomo26</td>
+                <td data-order="16.25">16.25</td>
+                <td class="task-1" data-order="14">14</td><td class="task-1" data-order="0.710234">0.710</td>
+                <td class="task-2" data-order="10">10</td><td class="task-2" data-order="0.164801">0.165</td><td class="task-2" data-order="0.09165">0.092</td>
+                <td class="task-3" data-order="13">13</td><td class="task-3" data-order="0.526722">0.527</td><td class="task-3" data-order="11.677934">11.68</td>
+                <td class="task-4" data-order="19">19</td><td class="task-4" data-order="0.090695">0.091</td><td class="task-4" data-order="0.227868">0.228</td>
+                <td class="task-5" data-order="30">30</td><td class="task-5" data-order="0.474251012145748">0.474</td>
+                <td class="task-67" data-order="16.5">16.5</td><td class="task-67" data-order="32">32</td><td class="task-67" data-order="0.146799">0.147</td><td class="task-67" data-order="0.059031">0.059</td>
+                <td class="task-67" data-order="1">1</td><td class="task-67" data-order="0.958955">0.959</td><td class="task-67" data-order="0.976402">0.976</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="20">20</td>
+                <td class="text-column">AIMZ</td>
+                <td data-order="17.675">17.675</td>
+                <td class="task-1" data-order="23">23</td><td class="task-1" data-order="0.653555">0.654</td>
+                <td class="task-2" data-order="14.5">14.5</td><td class="task-2" data-order="0.102372">0.102</td><td class="task-2" data-order="0.080741">0.081</td>
+                <td class="task-3" data-order="3.5">3.5</td><td class="task-3" data-order="0.654081">0.654</td><td class="task-3" data-order="8.963757">8.96</td>
+                <td class="task-4" data-order="27">27</td><td class="task-4" data-order="0.004902">0.005</td><td class="task-4" data-order="0.012795">0.013</td>
+                <td class="task-5" data-order="8">8</td><td class="task-5" data-order="0.5828340080971661">0.583</td>
+                <td class="task-67" data-order="19.25">19.25</td><td class="task-67" data-order="17.5">17.5</td><td class="task-67" data-order="0.419804">0.420</td><td class="task-67" data-order="0.601312">0.601</td>
+                <td class="task-67" data-order="21">21</td><td class="task-67" data-order="0.929229">0.929</td><td class="task-67" data-order="0.91568">0.916</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="21">21</td>
+                <td class="text-column">BrainSSL</td>
+                <td data-order="18.45">18.45</td>
+                <td class="task-1" data-order="15">15</td><td class="task-1" data-order="0.702012">0.702</td>
+                <td class="task-2" data-order="24.5">24.5</td><td class="task-2" data-order="0.081355">0.081</td><td class="task-2" data-order="0.04699">0.047</td>
+                <td class="task-3" data-order="25.5">25.5</td><td class="task-3" data-order="0.354716">0.355</td><td class="task-3" data-order="20.498738">20.50</td>
+                <td class="task-4" data-order="14.5">14.5</td><td class="task-4" data-order="0.160196">0.160</td><td class="task-4" data-order="0.339354">0.339</td>
+                <td class="task-5" data-order="27">27</td><td class="task-5" data-order="0.4974089068825911">0.497</td>
+                <td class="task-67" data-order="9.75">9.75</td><td class="task-67" data-order="3.5">3.5</td><td class="task-67" data-order="0.54546">0.545</td><td class="task-67" data-order="0.695946">0.696</td>
+                <td class="task-67" data-order="16">16</td><td class="task-67" data-order="0.934242">0.934</td><td class="task-67" data-order="0.92371">0.924</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="22">22</td>
+                <td class="text-column">WangLab-UNMC</td>
+                <td data-order="19.275">19.275</td>
+                <td class="task-1" data-order="5">5</td><td class="task-1" data-order="0.767109">0.767</td>
+                <td class="task-2" data-order="24.5">24.5</td><td class="task-2" data-order="0.072421">0.072</td><td class="task-2" data-order="0.061818">0.062</td>
+                <td class="task-3" data-order="11.5">11.5</td><td class="task-3" data-order="0.522064">0.522</td><td class="task-3" data-order="10.340006">10.34</td>
+                <td class="task-4" data-order="25">25</td><td class="task-4" data-order="0.052386">0.052</td><td class="task-4" data-order="0.099027">0.099</td>
+                <td class="task-5" data-order="9">9</td><td class="task-5" data-order="0.5778137651821862">0.578</td>
+                <td class="task-67" data-order="21.75">21.75</td><td class="task-67" data-order="25">25</td><td class="task-67" data-order="0.364378">0.364</td><td class="task-67" data-order="0.553366">0.553</td>
+                <td class="task-67" data-order="18.5">18.5</td><td class="task-67" data-order="0.942514">0.943</td><td class="task-67" data-order="0.905308">0.905</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="23">23</td>
+                <td class="text-column">volBrain</td>
+                <td data-order="20">20</td>
+                <td class="task-1" data-order="31">31</td><td class="task-1" data-order="0.50832">0.508</td>
+                <td class="task-2" data-order="27.5">27.5</td><td class="task-2" data-order="0.059528">0.060</td><td class="task-2" data-order="0.04488">0.045</td>
+                <td class="task-3" data-order="8.5">8.5</td><td class="task-3" data-order="0.60069">0.601</td><td class="task-3" data-order="10.806679">10.81</td>
+                <td class="task-4" data-order="14.5">14.5</td><td class="task-4" data-order="0.173286">0.173</td><td class="task-4" data-order="0.309581">0.310</td>
+                <td class="task-5" data-order="17">17</td><td class="task-5" data-order="0.5447773279352226">0.545</td>
+                <td class="task-67" data-order="19.25">19.25</td><td class="task-67" data-order="25">25</td><td class="task-67" data-order="0.351198">0.351</td><td class="task-67" data-order="0.553691">0.554</td>
+                <td class="task-67" data-order="13.5">13.5</td><td class="task-67" data-order="0.942472">0.942</td><td class="task-67" data-order="0.922742">0.923</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="24">24</td>
+                <td class="text-column">CAD-AI</td>
+                <td data-order="20.125">20.125</td>
+                <td class="task-1" data-order="27">27</td><td class="task-1" data-order="0.577891">0.578</td>
+                <td class="task-2" data-order="25">25</td><td class="task-2" data-order="0.074903">0.075</td><td class="task-2" data-order="0.049218">0.049</td>
+                <td class="task-3" data-order="19">19</td><td class="task-3" data-order="0.374388">0.374</td><td class="task-3" data-order="13.251975">13.25</td>
+                <td class="task-4" data-order="12.5">12.5</td><td class="task-4" data-order="0.178884">0.179</td><td class="task-4" data-order="0.361141">0.361</td>
+                <td class="task-5" data-order="23">23</td><td class="task-5" data-order="0.5208097165991903">0.521</td>
+                <td class="task-67" data-order="19.25">19.25</td><td class="task-67" data-order="19.5">19.5</td><td class="task-67" data-order="0.4142">0.414</td><td class="task-67" data-order="0.561854">0.562</td>
+                <td class="task-67" data-order="19">19</td><td class="task-67" data-order="0.936168">0.936</td><td class="task-67" data-order="0.912049">0.912</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="25">25</td>
+                <td class="text-column">OpenBrain_fomo26</td>
+                <td data-order="20.675">20.675</td>
+                <td class="task-1" data-order="32">32</td><td class="task-1" data-order="0.465742">0.466</td>
+                <td class="task-2" data-order="18.5">18.5</td><td class="task-2" data-order="0.101384">0.101</td><td class="task-2" data-order="0.062686">0.063</td>
+                <td class="task-3" data-order="26">26</td><td class="task-3" data-order="0.315274">0.315</td><td class="task-3" data-order="20.190061">20.19</td>
+                <td class="task-4" data-order="22">22</td><td class="task-4" data-order="0.070794">0.071</td><td class="task-4" data-order="0.156951">0.157</td>
+                <td class="task-5" data-order="18">18</td><td class="task-5" data-order="0.5431578947368421">0.543</td>
+                <td class="task-67" data-order="14.75">14.75</td><td class="task-67" data-order="14">14</td><td class="task-67" data-order="0.426321">0.426</td><td class="task-67" data-order="0.632698">0.633</td>
+                <td class="task-67" data-order="15.5">15.5</td><td class="task-67" data-order="0.917807">0.918</td><td class="task-67" data-order="0.933708">0.934</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="26">26</td>
+                <td class="text-column">Serenity</td>
+                <td data-order="20.775">20.775</td>
+                <td class="task-1" data-order="20">20</td><td class="task-1" data-order="0.679414">0.679</td>
+                <td class="task-2" data-order="22">22</td><td class="task-2" data-order="0.08144">0.081</td><td class="task-2" data-order="0.061958">0.062</td>
+                <td class="task-3" data-order="23">23</td><td class="task-3" data-order="0.303793">0.304</td><td class="task-3" data-order="14.36485">14.36</td>
+                <td class="task-4" data-order="18.5">18.5</td><td class="task-4" data-order="0.110056">0.110</td><td class="task-4" data-order="0.223812">0.224</td>
+                <td class="task-5" data-order="31">31</td><td class="task-5" data-order="0.45894736842105266">0.459</td>
+                <td class="task-67" data-order="16.25">16.25</td><td class="task-67" data-order="5">5</td><td class="task-67" data-order="0.527488">0.527</td><td class="task-67" data-order="0.682781">0.683</td>
+                <td class="task-67" data-order="27.5">27.5</td><td class="task-67" data-order="0.910071">0.910</td><td class="task-67" data-order="0.907568">0.908</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="27">27</td>
+                <td class="text-column">TUKE_FOMO26</td>
+                <td data-order="21.875">21.875</td>
+                <td class="task-1" data-order="25">25</td><td class="task-1" data-order="0.626328">0.626</td>
+                <td class="task-2" data-order="18">18</td><td class="task-2" data-order="0.095165">0.095</td><td class="task-2" data-order="0.076814">0.077</td>
+                <td class="task-3" data-order="30">30</td><td class="task-3" data-order="-0.074139">-0.074</td><td class="task-3" data-order="15.466246">15.47</td>
+                <td class="task-4" data-order="28.5">28.5</td><td class="task-4" data-order="0.003647">0.004</td><td class="task-4" data-order="0.007673">0.008</td>
+                <td class="task-5" data-order="14">14</td><td class="task-5" data-order="0.5640485829959514">0.564</td>
+                <td class="task-67" data-order="16.75">16.75</td><td class="task-67" data-order="25">25</td><td class="task-67" data-order="0.335148">0.335</td><td class="task-67" data-order="0.559034">0.559</td>
+                <td class="task-67" data-order="8.5">8.5</td><td class="task-67" data-order="0.939852">0.940</td><td class="task-67" data-order="0.93436">0.934</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="28">28</td>
+                <td class="text-column">bmic_seg_team</td>
+                <td data-order="22.325">22.325</td>
+                <td class="task-1" data-order="19">19</td><td class="task-1" data-order="0.682246">0.682</td>
+                <td class="task-2" data-order="27.5">27.5</td><td class="task-2" data-order="0.066325">0.066</td><td class="task-2" data-order="0.043213">0.043</td>
+                <td class="task-3" data-order="18">18</td><td class="task-3" data-order="0.524074">0.524</td><td class="task-3" data-order="13.681225">13.68</td>
+                <td class="task-4" data-order="26">26</td><td class="task-4" data-order="0.005056">0.005</td><td class="task-4" data-order="0.018987">0.019</td>
+                <td class="task-5" data-order="28">28</td><td class="task-5" data-order="0.49643724696356284">0.496</td>
+                <td class="task-67" data-order="12.25">12.25</td><td class="task-67" data-order="5.5">5.5</td><td class="task-67" data-order="0.518395">0.518</td><td class="task-67" data-order="0.684796">0.685</td>
+                <td class="task-67" data-order="19">19</td><td class="task-67" data-order="0.915064">0.915</td><td class="task-67" data-order="0.925041">0.925</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="29">29</td>
+                <td class="text-column">MedAI</td>
+                <td data-order="23.6">23.6</td>
+                <td class="task-1" data-order="29">29</td><td class="task-1" data-order="0.552754">0.553</td>
+                <td class="task-2" data-order="30">30</td><td class="task-2" data-order="0.013814">0.014</td><td class="task-2" data-order="0.013337">0.013</td>
+                <td class="task-3" data-order="19">19</td><td class="task-3" data-order="0.308529">0.309</td><td class="task-3" data-order="12.212755">12.21</td>
+                <td class="task-4" data-order="22">22</td><td class="task-4" data-order="0.078672">0.079</td><td class="task-4" data-order="0.156405">0.156</td>
+                <td class="task-5" data-order="25">25</td><td class="task-5" data-order="0.5068825910931174">0.507</td>
+                <td class="task-67" data-order="16.5">16.5</td><td class="task-67" data-order="8.5">8.5</td><td class="task-67" data-order="0.504285">0.504</td><td class="task-67" data-order="0.663019">0.663</td>
+                <td class="task-67" data-order="24.5">24.5</td><td class="task-67" data-order="0.907021">0.907</td><td class="task-67" data-order="0.923311">0.923</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="30">30</td>
+                <td class="text-column">carefree</td>
+                <td data-order="25.85">25.85</td>
+                <td class="task-1" data-order="24">24</td><td class="task-1" data-order="0.649941">0.650</td>
+                <td class="task-2" data-order="29">29</td><td class="task-2" data-order="0.036231">0.036</td><td class="task-2" data-order="0.016591">0.017</td>
+                <td class="task-3" data-order="25">25</td><td class="task-3" data-order="0.351947">0.352</td><td class="task-3" data-order="19.28788">19.29</td>
+                <td class="task-4" data-order="31">31</td><td class="task-4" data-order="0">0.000</td><td class="task-4" data-order="0.000049">0.000</td>
+                <td class="task-5" data-order="22">22</td><td class="task-5" data-order="0.524696356275303">0.525</td>
+                <td class="task-67" data-order="18.75">18.75</td><td class="task-67" data-order="13.5">13.5</td><td class="task-67" data-order="0.469815">0.470</td><td class="task-67" data-order="0.617346">0.617</td>
+                <td class="task-67" data-order="24">24</td><td class="task-67" data-order="0.91277">0.913</td><td class="task-67" data-order="0.920302">0.920</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="31">31</td>
+                <td class="text-column">LesionImpossible</td>
+                <td data-order="26.075">26.075</td>
+                <td class="task-1" data-order="28">28</td><td class="task-1" data-order="0.567988">0.568</td>
+                <td class="task-2" data-order="32">32</td><td class="task-2" data-order="0.006799">0.007</td><td class="task-2" data-order="0.006569">0.007</td>
+                <td class="task-3" data-order="26">26</td><td class="task-3" data-order="0.257701">0.258</td><td class="task-3" data-order="15.033563">15.03</td>
+                <td class="task-4" data-order="28.5">28.5</td><td class="task-4" data-order="0.001793">0.002</td><td class="task-4" data-order="0.009575">0.010</td>
+                <td class="task-5" data-order="15">15</td><td class="task-5" data-order="0.5602429149797571">0.560</td>
+                <td class="task-67" data-order="20.25">20.25</td><td class="task-67" data-order="10">10</td><td class="task-67" data-order="0.489949">0.490</td><td class="task-67" data-order="0.634449">0.634</td>
+                <td class="task-67" data-order="30.5">30.5</td><td class="task-67" data-order="0.904721">0.905</td><td class="task-67" data-order="0.906495">0.906</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="32">32</td>
+                <td class="text-column">1v4nVPU_fomo26</td>
+                <td data-order="28.225">28.225</td>
+                <td class="task-1" data-order="26">26</td><td class="task-1" data-order="0.608906">0.609</td>
+                <td class="task-2" data-order="31">31</td><td class="task-2" data-order="0.010345">0.010</td><td class="task-2" data-order="0.009756">0.010</td>
+                <td class="task-3" data-order="25.5">25.5</td><td class="task-3" data-order="0.195196">0.195</td><td class="task-3" data-order="14.380311">14.38</td>
+                <td class="task-4" data-order="31.5">31.5</td><td class="task-4" data-order="0">0.000</td><td class="task-4" data-order="0">0.000</td>
+                <td class="task-5" data-order="32">32</td><td class="task-5" data-order="0.388178137651821">0.388</td>
+                <td class="task-67" data-order="21.25">21.25</td><td class="task-67" data-order="17.5">17.5</td><td class="task-67" data-order="0.426766">0.427</td><td class="task-67" data-order="0.566602">0.567</td>
+                <td class="task-67" data-order="25">25</td><td class="task-67" data-order="0.920221">0.920</td><td class="task-67" data-order="0.9071">0.907</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="mt-14" aria-labelledby="open-heading">
+        <h2 id="open-heading" class="text-2xl font-bold text-gray-900 mb-2">Track 2: Open</h2>
+        <p class="text-sm text-gray-600 mb-4">Models may use additional public or private pretraining data.</p>
+        <div class="mb-5" data-controls-for="openResults">
+          <div class="flex flex-wrap gap-2" role="group" aria-label="Choose visible Open track columns">
+            <button type="button" class="filter-button utility-filter" data-action="all" aria-pressed="true"
+              aria-controls="openResults">All tasks</button>
+            <button type="button" class="filter-button utility-filter" data-action="overall" aria-pressed="false"
+              aria-controls="openResults">Overall only</button>
+            <button type="button" class="filter-button" data-task="task-1" aria-pressed="true"
+              aria-controls="openResults">Task 1</button>
+            <button type="button" class="filter-button" data-task="task-2" aria-pressed="true"
+              aria-controls="openResults">Task 2</button>
+            <button type="button" class="filter-button" data-task="task-3" aria-pressed="true"
+              aria-controls="openResults">Task 3</button>
+            <button type="button" class="filter-button" data-task="task-4" aria-pressed="true"
+              aria-controls="openResults">Task 4</button>
+            <button type="button" class="filter-button" data-task="task-5" aria-pressed="true"
+              aria-controls="openResults">Task 5</button>
+            <button type="button" class="filter-button" data-task="task-67" aria-pressed="true"
+              aria-controls="openResults">Tasks 6–7</button>
+          </div>
+          <div class="flex flex-wrap items-center gap-2 mt-3" role="group" aria-label="Choose Open track detail">
+            <span class="text-sm font-semibold text-gray-700 mr-1">Metric detail</span>
+            <button type="button" class="filter-button view-button" data-metric-mode="ranks" aria-pressed="true"
+              aria-controls="openResults">Ranks only</button>
+            <button type="button" class="filter-button view-button" data-metric-mode="all" aria-pressed="false"
+              aria-controls="openResults">All metrics</button>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table id="openResults" class="results-table">
+            <caption class="sr-only">FOMO26 Open track results</caption>
+            <thead>
+              <tr>
+                <th rowspan="2" class="placement-column">Placement</th>
+                <th rowspan="2" class="text-column">Team</th>
+                <th rowspan="2">Weighted<br>Average Rank</th>
+                <th colspan="2" class="task-1" data-group-header="task-1" data-all-colspan="2"
+                  data-rank-colspan="1"><span>Task 1</span><span class="task-title-long">:<br>Infarct Classification</span></th>
+                <th colspan="3" class="task-2" data-group-header="task-2" data-all-colspan="3"
+                  data-rank-colspan="1"><span>Task 2</span><span class="task-title-long">:<br>Meningioma Segmentation</span></th>
+                <th colspan="3" class="task-3" data-group-header="task-3" data-all-colspan="3"
+                  data-rank-colspan="1"><span>Task 3</span><span class="task-title-long">:<br>Brain Age Estimation</span></th>
+                <th colspan="3" class="task-4" data-group-header="task-4" data-all-colspan="3"
+                  data-rank-colspan="1"><span>Task 4</span><span class="task-title-long">:<br>Trigeminal Neuralgia Segmentation</span></th>
+                <th colspan="2" class="task-5" data-group-header="task-5" data-all-colspan="2"
+                  data-rank-colspan="1"><span>Task 5</span><span class="task-title-long">:<br>Polymicrogyria Classification</span></th>
+                <th colspan="7" class="task-67" data-group-header="task-67" data-all-colspan="7"
+                  data-rank-colspan="3"><span>Tasks 6–7</span><span class="task-title-long">:<br>Representation and Fairness</span></th>
+              </tr>
+              <tr>
+                <th class="task-1">Rank</th><th class="task-1 metric-column">AUROC</th>
+                <th class="task-2">Rank</th><th class="task-2 metric-column">Dice</th><th class="task-2 metric-column">NSD</th>
+                <th class="task-3">Rank</th><th class="task-3 metric-column">Correlation</th><th class="task-3 metric-column">MAE</th>
+                <th class="task-4">Rank</th><th class="task-4 metric-column">Dice</th><th class="task-4 metric-column">NSD</th>
+                <th class="task-5">Rank</th><th class="task-5 metric-column">AUROC</th>
+                <th class="task-67">Combined Rank</th><th class="task-67">Task 6 Rank</th>
+                <th class="task-67 metric-column">OvR F1</th><th class="task-67 metric-column">OvR AUROC</th>
+                <th class="task-67">Task 7 Rank</th><th class="task-67 metric-column">Fairness F1</th>
+                <th class="task-67 metric-column">Fairness AUROC</th>
+              </tr>
+            </thead>
+            <tbody>
+                            <tr class="rank-1">
+                <td class="placement-column" data-order="1">1</td>
+                <td class="text-column">CGVision</td>
+                <td data-order="5.075">5.075</td>
+                <td class="task-1" data-order="6">6</td><td class="task-1" data-order="0.66957">0.670</td>
+                <td class="task-2" data-order="4">4</td><td class="task-2" data-order="0.232706">0.233</td><td class="task-2" data-order="0.178892">0.179</td>
+                <td class="task-3" data-order="8">8</td><td class="task-3" data-order="0.327264">0.327</td><td class="task-3" data-order="13.907974">13.91</td>
+                <td class="task-4" data-order="3.5">3.5</td><td class="task-4" data-order="0.17129">0.171</td><td class="task-4" data-order="0.323675">0.324</td>
+                <td class="task-5" data-order="2">2</td><td class="task-5" data-order="0.695303643724696">0.695</td>
+                <td class="task-67" data-order="8">8</td><td class="task-67" data-order="10">10</td><td class="task-67" data-order="0.364997">0.365</td><td class="task-67" data-order="0.627167">0.627</td>
+                <td class="task-67" data-order="6">6</td><td class="task-67" data-order="0.927095">0.927</td><td class="task-67" data-order="0.938014">0.938</td>
+              </tr>
+              <tr class="rank-2">
+                <td class="placement-column" data-order="2">2</td>
+                <td class="text-column">FariaTeam</td>
+                <td data-order="5.45">5.45</td>
+                <td class="task-1" data-order="1">1</td><td class="task-1" data-order="0.787949">0.788</td>
+                <td class="task-2" data-order="9">9</td><td class="task-2" data-order="0.09689">0.097</td><td class="task-2" data-order="0.098328">0.098</td>
+                <td class="task-3" data-order="1">1</td><td class="task-3" data-order="0.708166">0.708</td><td class="task-3" data-order="9.556875">9.56</td>
+                <td class="task-4" data-order="1">1</td><td class="task-4" data-order="0.41295">0.413</td><td class="task-4" data-order="0.630761">0.631</td>
+                <td class="task-5" data-order="7">7</td><td class="task-5" data-order="0.540728744939271">0.541</td>
+                <td class="task-67" data-order="10.25">10.25</td><td class="task-67" data-order="8.5">8.5</td><td class="task-67" data-order="0.458818">0.459</td><td class="task-67" data-order="0.632105">0.632</td>
+                <td class="task-67" data-order="12">12</td><td class="task-67" data-order="0.920175">0.920</td><td class="task-67" data-order="0.91261">0.913</td>
+              </tr>
+              <tr class="rank-3">
+                <td class="placement-column" data-order="3">3</td>
+                <td class="text-column">bmic</td>
+                <td data-order="5.9">5.9</td>
+                <td class="task-1" data-order="12">12</td><td class="task-1" data-order="0.592012">0.592</td>
+                <td class="task-2" data-order="2.5">2.5</td><td class="task-2" data-order="0.275624">0.276</td><td class="task-2" data-order="0.178564">0.179</td>
+                <td class="task-3" data-order="8.5">8.5</td><td class="task-3" data-order="0.327264">0.327</td><td class="task-3" data-order="13.907975">13.91</td>
+                <td class="task-4" data-order="6.5">6.5</td><td class="task-4" data-order="0.137939">0.138</td><td class="task-4" data-order="0.289245">0.289</td>
+                <td class="task-5" data-order="4">4</td><td class="task-5" data-order="0.627044534412955">0.627</td>
+                <td class="task-67" data-order="6">6</td><td class="task-67" data-order="5">5</td><td class="task-67" data-order="0.537299">0.537</td><td class="task-67" data-order="0.645962">0.646</td>
+                <td class="task-67" data-order="7">7</td><td class="task-67" data-order="0.929444">0.929</td><td class="task-67" data-order="0.924027">0.924</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="4">4</td>
+                <td class="text-column">LatentCampus</td>
+                <td data-order="6.05">6.05</td>
+                <td class="task-1" data-order="10">10</td><td class="task-1" data-order="0.604141">0.604</td>
+                <td class="task-2" data-order="1.5">1.5</td><td class="task-2" data-order="0.275355">0.275</td><td class="task-2" data-order="0.243236">0.243</td>
+                <td class="task-3" data-order="2.5">2.5</td><td class="task-3" data-order="0.646708">0.647</td><td class="task-3" data-order="11.051954">11.05</td>
+                <td class="task-4" data-order="8.5">8.5</td><td class="task-4" data-order="0.053771">0.054</td><td class="task-4" data-order="0.153716">0.154</td>
+                <td class="task-5" data-order="15">15</td><td class="task-5" data-order="0.454251012145748">0.454</td>
+                <td class="task-67" data-order="4">4</td><td class="task-67" data-order="1">1</td><td class="task-67" data-order="0.567928">0.568</td><td class="task-67" data-order="0.720709">0.721</td>
+                <td class="task-67" data-order="7">7</td><td class="task-67" data-order="0.918811">0.919</td><td class="task-67" data-order="0.9429">0.943</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="5">5</td>
+                <td class="text-column">SynScans</td>
+                <td data-order="6.125">6.125</td>
+                <td class="task-1" data-order="2">2</td><td class="task-1" data-order="0.785742">0.786</td>
+                <td class="task-2" data-order="4">4</td><td class="task-2" data-order="0.238044">0.238</td><td class="task-2" data-order="0.157128">0.157</td>
+                <td class="task-3" data-order="12.5">12.5</td><td class="task-3" data-order="0.346471">0.346</td><td class="task-3" data-order="18.018481">18.02</td>
+                <td class="task-4" data-order="3.5">3.5</td><td class="task-4" data-order="0.168002">0.168</td><td class="task-4" data-order="0.328596">0.329</td>
+                <td class="task-5" data-order="1">1</td><td class="task-5" data-order="0.708178137651821">0.708</td>
+                <td class="task-67" data-order="13.5">13.5</td><td class="task-67" data-order="12.5">12.5</td><td class="task-67" data-order="0.354347">0.354</td><td class="task-67" data-order="0.343621">0.344</td>
+                <td class="task-67" data-order="14.5">14.5</td><td class="task-67" data-order="0.864896">0.865</td><td class="task-67" data-order="0.76435">0.764</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="6">6</td>
+                <td class="text-column">bmic_seg_team</td>
+                <td data-order="6.65">6.65</td>
+                <td class="task-1" data-order="4">4</td><td class="task-1" data-order="0.684395">0.684</td>
+                <td class="task-2" data-order="3">3</td><td class="task-2" data-order="0.23652">0.237</td><td class="task-2" data-order="0.206035">0.206</td>
+                <td class="task-3" data-order="4">4</td><td class="task-3" data-order="0.592563">0.593</td><td class="task-3" data-order="12.599713">12.60</td>
+                <td class="task-4" data-order="12">12</td><td class="task-4" data-order="0.024704">0.025</td><td class="task-4" data-order="0.084115">0.084</td>
+                <td class="task-5" data-order="14">14</td><td class="task-5" data-order="0.457813765182186">0.458</td>
+                <td class="task-67" data-order="3.5">3.5</td><td class="task-67" data-order="2.5">2.5</td><td class="task-67" data-order="0.546346">0.546</td><td class="task-67" data-order="0.70836">0.708</td>
+                <td class="task-67" data-order="4.5">4.5</td><td class="task-67" data-order="0.93041">0.930</td><td class="task-67" data-order="0.937049">0.937</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="7">7</td>
+                <td class="text-column">LST-FE</td>
+                <td data-order="7.35">7.35</td>
+                <td class="task-1" data-order="5">5</td><td class="task-1" data-order="0.678906">0.679</td>
+                <td class="task-2" data-order="11">11</td><td class="task-2" data-order="0.092774">0.093</td><td class="task-2" data-order="0.071864">0.072</td>
+                <td class="task-3" data-order="4.5">4.5</td><td class="task-3" data-order="0.518096">0.518</td><td class="task-3" data-order="11.140025">11.14</td>
+                <td class="task-4" data-order="9">9</td><td class="task-4" data-order="0.057897">0.058</td><td class="task-4" data-order="0.104244">0.104</td>
+                <td class="task-5" data-order="3">3</td><td class="task-5" data-order="0.669068825910931">0.669</td>
+                <td class="task-67" data-order="5.5">5.5</td><td class="task-67" data-order="4.5">4.5</td><td class="task-67" data-order="0.458835">0.459</td><td class="task-67" data-order="0.708428">0.708</td>
+                <td class="task-67" data-order="6.5">6.5</td><td class="task-67" data-order="0.927466">0.927</td><td class="task-67" data-order="0.928944">0.929</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="8">8</td>
+                <td class="text-column">Dolphins_creators</td>
+                <td data-order="7.8">7.8</td>
+                <td class="task-1" data-order="11">11</td><td class="task-1" data-order="0.59418">0.594</td>
+                <td class="task-2" data-order="7">7</td><td class="task-2" data-order="0.15088">0.151</td><td class="task-2" data-order="0.122296">0.122</td>
+                <td class="task-3" data-order="14">14</td><td class="task-3" data-order="0.063658">0.064</td><td class="task-3" data-order="15.253906">15.25</td>
+                <td class="task-4" data-order="2">2</td><td class="task-4" data-order="0.299913">0.300</td><td class="task-4" data-order="0.526634">0.527</td>
+                <td class="task-5" data-order="10">10</td><td class="task-5" data-order="0.507530364372469">0.508</td>
+                <td class="task-67" data-order="10.25">10.25</td><td class="task-67" data-order="14">14</td><td class="task-67" data-order="0.291464">0.291</td><td class="task-67" data-order="0.495181">0.495</td>
+                <td class="task-67" data-order="6.5">6.5</td><td class="task-67" data-order="0.944965">0.945</td><td class="task-67" data-order="0.916167">0.916</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="9">9</td>
+                <td class="text-column">AIMZ</td>
+                <td data-order="8.15">8.15</td>
+                <td class="task-1" data-order="7">7</td><td class="task-1" data-order="0.666094">0.666</td>
+                <td class="task-2" data-order="12">12</td><td class="task-2" data-order="0.076689">0.077</td><td class="task-2" data-order="0.065648">0.066</td>
+                <td class="task-3" data-order="3">3</td><td class="task-3" data-order="0.546039">0.546</td><td class="task-3" data-order="10.741678">10.74</td>
+                <td class="task-4" data-order="11">11</td><td class="task-4" data-order="0.039431">0.039</td><td class="task-4" data-order="0.089748">0.090</td>
+                <td class="task-5" data-order="8">8</td><td class="task-5" data-order="0.521781376518218">0.522</td>
+                <td class="task-67" data-order="3">3</td><td class="task-67" data-order="4.5">4.5</td><td class="task-67" data-order="0.530063">0.530</td><td class="task-67" data-order="0.682263">0.682</td>
+                <td class="task-67" data-order="1.5">1.5</td><td class="task-67" data-order="0.946297">0.946</td><td class="task-67" data-order="0.947603">0.948</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="10">10</td>
+                <td class="text-column">HINT-PlaneCycle</td>
+                <td data-order="8.875">8.875</td>
+                <td class="task-1" data-order="3">3</td><td class="task-1" data-order="0.732773">0.733</td>
+                <td class="task-2" data-order="15">15</td><td class="task-2" data-order="0.013663">0.014</td><td class="task-2" data-order="0.011856">0.012</td>
+                <td class="task-3" data-order="7.5">7.5</td><td class="task-3" data-order="0.35891">0.359</td><td class="task-3" data-order="13.92805">13.93</td>
+                <td class="task-4" data-order="6.5">6.5</td><td class="task-4" data-order="0.141562">0.142</td><td class="task-4" data-order="0.255905">0.256</td>
+                <td class="task-5" data-order="5">5</td><td class="task-5" data-order="0.548016194331983">0.548</td>
+                <td class="task-67" data-order="9.75">9.75</td><td class="task-67" data-order="7">7</td><td class="task-67" data-order="0.487098">0.487</td><td class="task-67" data-order="0.641315">0.641</td>
+                <td class="task-67" data-order="12.5">12.5</td><td class="task-67" data-order="0.896959">0.897</td><td class="task-67" data-order="0.913751">0.914</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="11">11</td>
+                <td class="text-column">MIPLAB-FOMO26</td>
+                <td data-order="9.45">9.45</td>
+                <td class="task-1" data-order="8">8</td><td class="task-1" data-order="0.650176">0.650</td>
+                <td class="task-2" data-order="6">6</td><td class="task-2" data-order="0.159446">0.159</td><td class="task-2" data-order="0.125065">0.125</td>
+                <td class="task-3" data-order="13.5">13.5</td><td class="task-3" data-order="0.24282">0.243</td><td class="task-3" data-order="15.44879">15.45</td>
+                <td class="task-4" data-order="13">13</td><td class="task-4" data-order="0.013769">0.014</td><td class="task-4" data-order="0.033768">0.034</td>
+                <td class="task-5" data-order="13">13</td><td class="task-5" data-order="0.475627530364372">0.476</td>
+                <td class="task-67" data-order="6.25">6.25</td><td class="task-67" data-order="4.5">4.5</td><td class="task-67" data-order="0.517478">0.517</td><td class="task-67" data-order="0.695697">0.696</td>
+                <td class="task-67" data-order="8">8</td><td class="task-67" data-order="0.923548">0.924</td><td class="task-67" data-order="0.928532">0.929</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="12">12</td>
+                <td class="text-column">fomoTNT</td>
+                <td data-order="9.925">9.925</td>
+                <td class="task-1" data-order="14">14</td><td class="task-1" data-order="0.551445">0.551</td>
+                <td class="task-2" data-order="9.5">9.5</td><td class="task-2" data-order="0.108482">0.108</td><td class="task-2" data-order="0.08112">0.081</td>
+                <td class="task-3" data-order="12">12</td><td class="task-3" data-order="0.143881">0.144</td><td class="task-3" data-order="13.939654">13.94</td>
+                <td class="task-4" data-order="5">5</td><td class="task-4" data-order="0.141705">0.142</td><td class="task-4" data-order="0.308712">0.309</td>
+                <td class="task-5" data-order="9">9</td><td class="task-5" data-order="0.50914979757085">0.509</td>
+                <td class="task-67" data-order="14">14</td><td class="task-67" data-order="13.5">13.5</td><td class="task-67" data-order="0.341639">0.342</td><td class="task-67" data-order="0.327234">0.327</td>
+                <td class="task-67" data-order="14.5">14.5</td><td class="task-67" data-order="0.840645">0.841</td><td class="task-67" data-order="0.776682">0.777</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="13">13</td>
+                <td class="text-column">Indiana University</td>
+                <td data-order="10.375">10.375</td>
+                <td class="task-1" data-order="13">13</td><td class="task-1" data-order="0.570215">0.570</td>
+                <td class="task-2" data-order="8.5">8.5</td><td class="task-2" data-order="0.129791">0.130</td><td class="task-2" data-order="0.090643">0.091</td>
+                <td class="task-3" data-order="9.5">9.5</td><td class="task-3" data-order="0.347663">0.348</td><td class="task-3" data-order="15.21415">15.21</td>
+                <td class="task-4" data-order="14">14</td><td class="task-4" data-order="0.000102">0.000</td><td class="task-4" data-order="0.000098">0.000</td>
+                <td class="task-5" data-order="6">6</td><td class="task-5" data-order="0.541781376518218">0.542</td>
+                <td class="task-67" data-order="9.5">9.5</td><td class="task-67" data-order="13">13</td><td class="task-67" data-order="0.295411">0.295</td><td class="task-67" data-order="0.543516">0.544</td>
+                <td class="task-67" data-order="6">6</td><td class="task-67" data-order="0.946423">0.946</td><td class="task-67" data-order="0.915706">0.916</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="14">14</td>
+                <td class="text-column">FOMOHINT</td>
+                <td data-order="11.475">11.475</td>
+                <td class="task-1" data-order="15">15</td><td class="task-1" data-order="0.54252">0.543</td>
+                <td class="task-2" data-order="14">14</td><td class="task-2" data-order="0.048359">0.048</td><td class="task-2" data-order="0.032989">0.033</td>
+                <td class="task-3" data-order="11.5">11.5</td><td class="task-3" data-order="0.245305">0.245</td><td class="task-3" data-order="14.326462">14.33</td>
+                <td class="task-4" data-order="9.5">9.5</td><td class="task-4" data-order="0.041993">0.042</td><td class="task-4" data-order="0.108087">0.108</td>
+                <td class="task-5" data-order="11">11</td><td class="task-5" data-order="0.502348178137651">0.502</td>
+                <td class="task-67" data-order="9.25">9.25</td><td class="task-67" data-order="12">12</td><td class="task-67" data-order="0.298535">0.299</td><td class="task-67" data-order="0.548716">0.549</td>
+                <td class="task-67" data-order="6.5">6.5</td><td class="task-67" data-order="0.941787">0.942</td><td class="task-67" data-order="0.922067">0.922</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="15">15</td>
+                <td class="text-column">MedaLab_Codiwa</td>
+                <td data-order="11.85">11.85</td>
+                <td class="task-1" data-order="9">9</td><td class="task-1" data-order="0.605547">0.606</td>
+                <td class="task-2" data-order="13">13</td><td class="task-2" data-order="0.049055">0.049</td><td class="task-2" data-order="0.041867">0.042</td>
+                <td class="task-3" data-order="13">13</td><td class="task-3" data-order="0.305399">0.305</td><td class="task-3" data-order="17.269945">17.27</td>
+                <td class="task-4" data-order="15">15</td><td class="task-4" data-order="0">0.000</td><td class="task-4" data-order="0">0.000</td>
+                <td class="task-5" data-order="12">12</td><td class="task-5" data-order="0.496032388663967">0.496</td>
+                <td class="task-67" data-order="7.25">7.25</td><td class="task-67" data-order="7.5">7.5</td><td class="task-67" data-order="0.450006">0.450</td><td class="task-67" data-order="0.657641">0.658</td>
+                <td class="task-67" data-order="7">7</td><td class="task-67" data-order="0.928945">0.929</td><td class="task-67" data-order="0.927515">0.928</td>
+              </tr>
+              <tr>
+                <td class="placement-column" data-order="16">16</td>
+                <td class="text-column">NiChart</td>
+                <td data-order="15.2">15.2</td>
+                <td class="task-1" data-order="16">16</td><td class="task-1">—</td>
+                <td class="task-2" data-order="16">16</td><td class="task-2">—</td><td class="task-2">—</td>
+                <td class="task-3" data-order="10.5">10.5</td><td class="task-3" data-order="0.468672">0.469</td><td class="task-3" data-order="17.985753">17.99</td>
+                <td class="task-4" data-order="15">15</td><td class="task-4">—</td><td class="task-4">—</td>
+                <td class="task-5" data-order="16">16</td><td class="task-5">—</td>
+                <td class="task-67" data-order="16">16</td><td class="task-67" data-order="16">16</td><td class="task-67">—</td><td class="task-67">—</td>
+                <td class="task-67" data-order="16">16</td><td class="task-67">—</td><td class="task-67">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="bg-gray-200 py-6 mt-0 w-full">
+    <div class="max-w-7xl mx-auto text-center text-sm text-gray-600">
+      &copy; 2026 FOMO Challenge. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const taskGroups = ["task-1", "task-2", "task-3", "task-4", "task-5", "task-67"];
+      const metricColumnIndexes = [4, 6, 7, 9, 10, 12, 13, 15, 18, 19, 21, 22];
+      const dataTables = new Map();
+
+      function launchConfetti() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        if (!context) return;
+
+        canvas.className = "confetti-layer";
+        canvas.setAttribute("aria-hidden", "true");
+        document.body.appendChild(canvas);
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+        function resizeCanvas() {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.round(width * pixelRatio);
+          canvas.height = Math.round(height * pixelRatio);
+          context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+        }
+
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        const colors = ["#d4a72c", "#c026d3", "#4f46e5", "#ec4899", "#06b6d4", "#f59e0b"];
+        const pieceCount = width < 640 ? 80 : 140;
+        const pieces = Array.from({ length: pieceCount }, () => ({
+          color: colors[Math.floor(Math.random() * colors.length)],
+          height: 5 + Math.random() * 7,
+          rotation: Math.random() * Math.PI,
+          rotationSpeed: (Math.random() - 0.5) * 9,
+          vx: (Math.random() - 0.5) * 120,
+          vy: 120 + Math.random() * 170,
+          width: 4 + Math.random() * 6,
+          x: Math.random() * width,
+          y: -20 - Math.random() * height * 0.4
+        }));
+
+        const duration = 3200;
+        let previousTime;
+        let startTime;
+
+        function drawFrame(time) {
+          if (!startTime) startTime = time;
+          if (!previousTime) previousTime = time;
+          const elapsed = time - startTime;
+          const delta = Math.min((time - previousTime) / 1000, 0.034);
+          const opacity = Math.max(0, Math.min(1, (duration - elapsed) / 650));
+          previousTime = time;
+
+          context.clearRect(0, 0, width, height);
+          context.globalAlpha = opacity;
+
+          pieces.forEach((piece) => {
+            piece.vy += 105 * delta;
+            piece.x += piece.vx * delta;
+            piece.y += piece.vy * delta;
+            piece.rotation += piece.rotationSpeed * delta;
+
+            context.save();
+            context.translate(piece.x, piece.y);
+            context.rotate(piece.rotation);
+            context.fillStyle = piece.color;
+            context.fillRect(-piece.width / 2, -piece.height / 2, piece.width, piece.height);
+            context.restore();
+          });
+
+          if (elapsed < duration) {
+            window.requestAnimationFrame(drawFrame);
+          } else {
+            window.removeEventListener("resize", resizeCanvas);
+            canvas.remove();
+          }
+        }
+
+        window.requestAnimationFrame(drawFrame);
+      }
+
+      if (document.readyState === "complete") launchConfetti();
+      else window.addEventListener("load", launchConfetti, { once: true });
+
+      document.querySelectorAll(".results-table tbody tr").forEach((row) => {
+        metricColumnIndexes.forEach((index) => row.cells[index].classList.add("metric-column"));
+      });
+
+      if (window.jQuery && window.jQuery.fn && window.jQuery.fn.DataTable) {
+        ["#methodResults", "#openResults"].forEach((selector) => {
+          const table = document.querySelector(selector);
+          dataTables.set(table.id, window.jQuery(selector).DataTable({
+            paging: false,
+            searching: false,
+            info: false,
+            responsive: false,
+            autoWidth: false,
+            orderCellsTop: false,
+            order: [[0, "asc"]]
+          }));
+        });
+      }
+
+      document.querySelectorAll("[data-controls-for]").forEach((controls) => {
+        const table = document.getElementById(controls.dataset.controlsFor);
+        const activeTasks = new Set(taskGroups);
+        let metricMode = "ranks";
+
+        function renderTaskColumns() {
+          taskGroups.forEach((group) => {
+            const groupVisible = activeTasks.has(group);
+            table.querySelectorAll(`.${group}`).forEach((cell) => {
+              const metricHidden = metricMode === "ranks" && cell.classList.contains("metric-column");
+              cell.classList.toggle("column-hidden", !groupVisible || metricHidden);
+            });
+            const button = controls.querySelector(`[data-task="${group}"]`);
+            button.setAttribute("aria-pressed", String(groupVisible));
+            table.querySelectorAll(`[data-group-header="${group}"]`).forEach((header) => {
+              header.colSpan = Number(metricMode === "ranks" ? header.dataset.rankColspan : header.dataset.allColspan);
+            });
+          });
+
+          controls.querySelector('[data-action="all"]').setAttribute(
+            "aria-pressed", String(activeTasks.size === taskGroups.length)
+          );
+          controls.querySelector('[data-action="overall"]').setAttribute(
+            "aria-pressed", String(activeTasks.size === 0)
+          );
+          table.classList.toggle("overall-view", activeTasks.size === 0);
+          table.classList.toggle("ranks-only", metricMode === "ranks");
+          controls.querySelectorAll("[data-metric-mode]").forEach((button) => {
+            button.setAttribute("aria-pressed", String(button.dataset.metricMode === metricMode));
+          });
+          const dataTable = dataTables.get(table.id);
+          if (dataTable) dataTable.columns.adjust().draw(false);
+        }
+
+        controls.querySelectorAll("[data-task]").forEach((button) => {
+          button.addEventListener("click", () => {
+            const group = button.dataset.task;
+            if (activeTasks.has(group)) activeTasks.delete(group);
+            else activeTasks.add(group);
+            renderTaskColumns();
+          });
+        });
+
+        controls.querySelector('[data-action="all"]').addEventListener("click", () => {
+          taskGroups.forEach((group) => activeTasks.add(group));
+          renderTaskColumns();
+        });
+
+        controls.querySelector('[data-action="overall"]').addEventListener("click", () => {
+          activeTasks.clear();
+          renderTaskColumns();
+        });
+
+        controls.querySelectorAll("[data-metric-mode]").forEach((button) => {
+          button.addEventListener("click", () => {
+            metricMode = button.dataset.metricMode;
+            renderTaskColumns();
+          });
+        });
+
+        renderTaskColumns();
+      });
+
+      const toggleBtn = document.getElementById("menu-toggle");
+      const closeBtn = document.getElementById("close-menu");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      document.addEventListener("click", (event) => {
+        const toggle = document.getElementById("editions-toggle");
+        const menu = document.getElementById("editions-menu");
+        if (toggle && menu && !toggle.contains(event.target)) menu.classList.add("hidden");
+      });
+
+      if (toggleBtn && closeBtn && mobileMenu) {
+        toggleBtn.addEventListener("click", () => mobileMenu.classList.remove("-translate-x-full"));
+        closeBtn.addEventListener("click", () => mobileMenu.classList.add("-translate-x-full"));
+        mobileMenu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => mobileMenu.classList.add("-translate-x-full"));
+        });
+      }
+
+      if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+        const script = document.createElement("script");
+        script.src = "https://cdn.counter.dev/script.js";
+        script.setAttribute("data-id", "b3dc771d-812f-4e64-9ff1-986190e73657");
+        script.setAttribute("data-utcoffset", "1");
+        document.head.appendChild(script);
+      }
+    });
+  </script>
+</body>
+
+</html>

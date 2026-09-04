@@ -4,10 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Signup - FOMO26 - Foundation Model Challenge for Brain MRI</title>
-  <meta name="description" content="Sign up for FOMO26 at MICCAI 2026." />
+  <title>Registration Closed - FOMO26 - Foundation Model Challenge for Brain MRI</title>
+  <meta name="description" content="Registration for FOMO26 is closed. View the final challenge results." />
+  <link rel="canonical" href="https://fomo26.github.io/signup.html" />
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FOMO26" />
+  <meta property="og:title" content="Registration Closed - FOMO26" />
+  <meta property="og:description" content="Registration for FOMO26 is closed. View the final challenge results." />
+  <meta property="og:url" content="https://fomo26.github.io/signup.html" />
+  <meta property="og:image" content="https://fomo26.github.io/images/fomo26.png" />
+  <meta property="og:image:width" content="1320" />
+  <meta property="og:image:height" content="611" />
+  <meta property="og:image:alt" content="Overview of the FOMO26 brain MRI challenge" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Registration Closed - FOMO26" />
+  <meta name="twitter:description" content="Registration for FOMO26 is closed. View the final challenge results." />
+  <meta name="twitter:image" content="https://fomo26.github.io/images/fomo26.png" />
+  <meta name="twitter:image:alt" content="Overview of the FOMO26 brain MRI challenge" />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   <style>
     .logo-fomo {
       background: linear-gradient(to right, #2563eb, #db2777);
@@ -16,9 +31,7 @@
       background-clip: text;
     }
 
-    .logo-26 {
-      color: #db2777;
-    }
+    .logo-26 { color: #db2777; }
 
     .logo-link {
       transition: filter 0.3s ease;
@@ -26,43 +39,42 @@
       transform: translateZ(0);
     }
 
-    .logo-link:hover {
-      filter: drop-shadow(0 0 10px rgba(219, 39, 119, 0.65));
+    .logo-link:hover { filter: drop-shadow(0 0 10px rgba(219, 39, 119, 0.65)); }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    [x-cloak] {
-      display: none !important;
-    }
+    main { flex: 1; }
   </style>
 </head>
 
 <body class="bg-gray-100 text-gray-900 overflow-x-hidden">
-
   <header class="bg-white shadow sticky top-0 z-40">
     <div class="max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
-      <h1 class="text-3xl font-bold tracking-tight"><a href="index.html" class="logo-link" title=" "><span
+      <h1 class="text-3xl font-bold tracking-tight"><a href="/" class="logo-link" title="FOMO26 home"><span
             class="logo-fomo">FOMO</span><span class="logo-26">26</span></a></h1>
 
       <button id="menu-toggle" class="focus:outline-none block md:hidden" aria-label="Open menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
         </svg>
       </button>
 
-      <nav class="hidden md:block">
+      <nav class="hidden md:block" aria-label="Main navigation">
         <ul class="flex space-x-4 justify-center items-center">
-          <li><a href="index.html#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
-          <li><a href="index.html#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
-          <li><a href="index.html#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
+          <li><a href="/#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
+          <li><a href="/#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
+          <li><a href="/#rules" class="text-gray-900 hover:text-gray-600">Rules</a></li>
+          <li><a href="/#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
           <li class="relative">
-            <button id="editions-toggle" onclick="document.getElementById('editions-menu').classList.toggle('hidden')"
-              class="text-gray-900 hover:text-gray-600 flex items-center gap-1">
+            <button id="editions-toggle" type="button"
+              onclick="document.getElementById('editions-menu').classList.toggle('hidden')"
+              class="text-gray-900 hover:text-gray-600 flex items-center gap-1" aria-haspopup="true">
               Previous editions
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
@@ -72,27 +84,28 @@
                   class="block px-4 py-2 text-gray-900 hover:bg-gray-100 rounded-lg">FOMO25</a></li>
             </ul>
           </li>
-          <li><a href="signup.html" class="text-pink-600 font-semibold hover:text-pink-700">Sign Up</a></li>
+          <li><a href="/results/" class="text-pink-600 font-semibold hover:text-pink-700">Results</a></li>
         </ul>
       </nav>
 
       <div id="mobile-menu"
         class="fixed top-0 left-0 h-full w-64 bg-white shadow transform -translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden p-6">
         <button id="close-menu" class="mb-4 focus:outline-none" aria-label="Close menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
         <ul class="flex flex-col space-y-4">
-          <li><a href="index.html#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
-          <li><a href="index.html#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
-          <li><a href="index.html#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
+          <li><a href="/#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
+          <li><a href="/#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
+          <li><a href="/#rules" class="text-gray-900 hover:text-gray-600">Rules</a></li>
+          <li><a href="/#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
           <li>
             <p class="text-gray-500 text-sm font-medium mb-1">Previous editions</p>
             <a href="https://fomo25.github.io" target="_blank" rel="noopener noreferrer"
               class="text-gray-900 hover:text-gray-600 pl-2">FOMO25</a>
           </li>
-          <li><a href="signup.html" class="text-pink-600 font-semibold hover:text-pink-700">Sign Up</a></li>
+          <li><a href="/results/" class="text-pink-600 font-semibold hover:text-pink-700">Results</a></li>
         </ul>
       </div>
 
@@ -102,244 +115,21 @@
     </div>
   </header>
 
-  <main class="pb-10">
-    <div class="bg-white text-gray-900 max-w-4xl mx-auto px-8 py-16 my-8 rounded-lg shadow-md"
-      x-data="{ checkboxSynapse: false, showForm: false, highlightNewSection: false, synapseUsername: '', synapseTeamName: '' }">
-
-      <h1 class="text-2xl font-bold text-center mb-8">Sign Up for FOMO26</h1>
-
-
-
-      <div class="mb-12 space-y-12">
-
-        <!-- Step 1: Synapse Registration -->
-        <div class="flex items-start space-x-4">
-          <div class="flex-shrink-0">
-            <span
-              class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-400 text-white font-bold">1</span>
-          </div>
-          <div class="flex-1">
-            <h2 class="text-lg font-semibold">Register for the challenge on Synapse (required!)</h2>
-            <p class="mt-1 text-sm text-gray-700 mb-4">This <span class="italic">must</span> be done as the first
-              step.</p>
-            <ol class="list-decimal pl-6 text-sm text-gray-700 space-y-2">
-              <li>Go to the FOMO26 Synapse page and sign up: <a
-                  href="https://www.synapse.org/Synapse:syn72120565/wiki/640173" target="_blank"
-                  rel="noopener noreferrer" class="text-indigo-600 underline">FOMO26 on Synapse</a>.
-              </li>
-            </ol>
-
-            <div class="mt-8 space-y-6">
-              <div class="border border-gray-200 rounded-md p-4 bg-gray-50 space-y-6">
-                <div>
-                  <label for="synapse-username-step1" class="block text-sm font-medium text-gray-700">Synapse
-                    Username*</label>
-                  <input type="text" id="synapse-username-step1" x-model="synapseUsername"
-                    class="mt-2 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                  <p class="mt-1 text-sm text-gray-500">
-                    To find your Synapse username click "Your Account" then "View Profile" in the bottom-left of the
-                    Synapse UI. For example, the username for the following individual would be "my-synapse-username":
-                  </p>
-                  <img src="images/synapse-username.png" alt="Example showing where to find the Synapse username"
-                    class="mt-2 ml-8 max-h-64 rounded-md shadow-sm">
-                </div>
-                <div>
-                  <label for="synapse-team-name-step1" class="block text-sm font-medium text-gray-700">Synapse Team
-                    Name*</label>
-                  <input type="text" id="synapse-team-name-step1" x-model="synapseTeamName"
-                    class="mt-2 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                  <p class="mt-1 text-sm text-gray-500">
-                    Participation requires a team on Synapse. Please enter your team name. If you have not yet created a
-                    team, create one on Synapse before continuing.
-                  </p>
-                </div>
-              </div>
-              <div class="flex items-center">
-                <input id="confirm-synapse-registration" name="confirm-synapse-registration" type="checkbox"
-                  x-model="checkboxSynapse" class="h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                <label for="confirm-synapse-registration" class="ml-2 text-sm text-gray-700">
-                  I confirm that I have registered for the challenge on Synapse
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Continue button -->
-      <div class="mb-12 pl-14">
-        <button
-          @click="showForm = true; highlightNewSection = true; setTimeout(() => { highlightNewSection = false; }, 3000); setTimeout(() => { document.getElementById('form-step-2').scrollIntoView({behavior: 'smooth', block: 'start'}); }, 100)"
-          :disabled="!checkboxSynapse || !synapseUsername.trim() || !synapseTeamName.trim()"
-          :class="{'bg-indigo-600 hover:bg-indigo-700': checkboxSynapse && synapseUsername.trim() && synapseTeamName.trim(), 'bg-gray-400 cursor-not-allowed': !checkboxSynapse || !synapseUsername.trim() || !synapseTeamName.trim()}"
-          class="py-2 px-6 rounded-md shadow text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
-          Continue
-        </button>
-      </div>
-
-      <!-- Step 3: Form -->
-      <div id="form-step-2" class="flex items-start space-x-4 pt-4" x-show="showForm" x-transition x-cloak>
-        <div class="flex-shrink-0">
-          <span
-            class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-400 text-white font-bold">2</span>
-        </div>
-        <div class="flex-1">
-          <h2 class="text-lg font-semibold mb-6">Fill out the following form</h2>
-
-          <form action="https://api.web3forms.com/submit" method="POST" class="space-y-8">
-
-            <input type="hidden" name="access_key" value="b62b671c-1eb0-42d5-b1f2-3209c2a31a47">
-            <input type="hidden" name="subject" value="New FOMO26 Challenge Signup">
-            <input type="hidden" name="from_name" value="FOMO26 Signup Form">
-            <input type="checkbox" name="botcheck" style="display:none">
-
-            <!-- Synapse fields passed through from Step 1 -->
-            <input type="hidden" name="synapse-username" x-bind:value="synapseUsername">
-            <input type="hidden" name="synapse-team-name" x-bind:value="synapseTeamName">
-
-            <!-- Personal Information -->
-            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
-              <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Personal Information</h3>
-              <div class="space-y-4">
-                <div class="flex space-x-4">
-                  <div class="w-1/2">
-                    <label for="first-name" class="block text-sm font-medium text-gray-700">First Name*</label>
-                    <input type="text" id="first-name" name="first-name" required
-                      class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                  </div>
-                  <div class="w-1/2">
-                    <label for="last-name" class="block text-sm font-medium text-gray-700">Last Name*</label>
-                    <input type="text" id="last-name" name="last-name" required
-                      class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                  </div>
-                </div>
-                <div>
-                  <label for="email" class="block text-sm font-medium text-gray-700">Email Address*</label>
-                  <input type="email" id="email" name="email" required
-                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                </div>
-              </div>
-            </div>
-
-            <!-- Affiliation -->
-            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
-              <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Affiliation</h3>
-              <div class="space-y-4">
-                <div>
-                  <label for="affiliated-institution" class="block text-sm font-medium text-gray-700">Affiliated
-                    Institution*</label>
-                  <input type="text" id="affiliated-institution" name="affiliated-institution" required
-                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                </div>
-                <div>
-                  <label for="city" class="block text-sm font-medium text-gray-700">City*</label>
-                  <input type="text" id="city" name="city" required
-                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                </div>
-                <div>
-                  <label for="country" class="block text-sm font-medium text-gray-700">Country*</label>
-                  <input type="text" id="country" name="country" required
-                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                </div>
-                <div>
-                  <label for="position" class="block text-sm font-medium text-gray-700">Position*</label>
-                  <select id="position" name="position" required
-                    class="mt-1 block w-full border border-gray-400 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2 bg-white">
-                    <option value="">-- Select your position --</option>
-                    <option value="PhD Student/Candidate">PhD Student / Candidate</option>
-                    <option value="Professor">Professor</option>
-                    <option value="Associate/Assistant Professor">Associate/Assistant Professor</option>
-                    <option value="Postdoc">Postdoc</option>
-                    <option value="Graduate Student">Graduate Student</option>
-                    <option value="Student">Student — other</option>
-                    <option value="Research Scientist">Research Scientist</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-                <div id="other-position-field" class="hidden">
-                  <label for="other-position" class="block text-sm font-medium text-gray-700">Please specify your
-                    position*</label>
-                  <input type="text" id="other-position" name="other-position"
-                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                </div>
-              </div>
-            </div>
-
-            <!-- Research Group Information -->
-            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
-              <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Research Group Information
-                <span class="text-gray-400 font-normal text-sm">(optional)</span>
-              </h3>
-              <div class="space-y-4">
-                <div>
-                  <label for="research-group" class="block text-sm font-medium text-gray-700">Name of your research
-                    group</label>
-                  <input type="text" id="research-group" name="research-group"
-                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                </div>
-                <div>
-                  <label for="pi-name" class="block text-sm font-medium text-gray-700">PI Name</label>
-                  <input type="text" id="pi-name" name="pi-name"
-                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                </div>
-                <div>
-                  <label for="pi-email" class="block text-sm font-medium text-gray-700">PI Email</label>
-                  <input type="email" id="pi-email" name="pi-email"
-                    class="mt-1 block w-full border border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 px-3 py-2">
-                </div>
-              </div>
-            </div>
-
-            <!-- Terms and Agreements -->
-            <div class="border border-gray-200 rounded-md p-4 bg-gray-50">
-              <h3 class="text-md font-medium text-gray-800 mb-4 border-b pb-2">Terms and Agreements</h3>
-              <fieldset>
-                <div class="mt-2 space-y-3">
-                  <div class="flex items-start">
-                    <input id="data-usage" name="data-usage" type="checkbox" required
-                      class="mt-0.5 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                    <label for="data-usage" class="ml-2 text-sm text-gray-700">I agree to use the finetune data provided
-                      by the FOMO26 organizers solely for the purpose of the FOMO26 Challenge.</a></label>
-                  </div>
-                  <div class="flex items-start">
-                    <input id="open-track-data" name="open-track-data" type="checkbox" required
-                      class="mt-0.5 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                    <label for="open-track-data" class="ml-2 text-sm text-gray-700">External pretraining data is only
-                      allowed in the Open Track. I confirm that any external pretraining data I use is data I have the
-                      rights to use for the FOMO26 Challenge.</label>
-                  </div>
-                </div>
-              </fieldset>
-            </div>
-
-            <div>
-              <button type="submit"
-                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors">
-                Submit Registration
-              </button>
-            </div>
-
-          </form>
-        </div>
-      </div>
-
-      <!-- Step 3: Wait for email -->
-      <div class="flex items-start space-x-4 pt-12" x-show="showForm" x-transition x-cloak>
-        <div class="flex-shrink-0">
-          <span
-            class="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gray-400 text-white font-bold">3</span>
-        </div>
-        <div class="flex-1">
-          <p class="text-lg font-semibold">Wait for Email</p>
-          <p class="mt-1 text-sm text-gray-700">
-            We will verify your information and send you instructions on how to access data. We strive to do this
-            within 24 hours during weekdays CET, but please note that it can take up to 72 hours.
-          </p>
-        </div>
-      </div>
-
-    </div>
+  <main class="flex items-center py-12 px-4">
+    <section class="bg-white text-gray-900 max-w-3xl w-full mx-auto px-8 py-16 rounded-lg shadow-md text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-pink-600 mb-3">FOMO26</p>
+      <h1 class="text-3xl font-extrabold text-gray-900 mb-5">Registration is closed</h1>
+      <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-8">
+        Thank you to everyone who participated in the FOMO26 Challenge. The final rankings for the Methods and Open
+        tracks are now available.
+      </p>
+      <a href="/results/"
+        class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-7 rounded-md shadow transition-colors">
+        See the Results
+      </a>
+      <p class="text-gray-500 mt-8">Questions? Contact <a href="mailto:fomo26@di.ku.dk"
+          class="text-pink-600 hover:underline">fomo26@di.ku.dk</a>.</p>
+    </section>
   </main>
 
   <footer class="bg-gray-200 py-6 mt-0 w-full">
@@ -349,46 +139,36 @@
   </footer>
 
   <script>
-    // Mobile menu
     const toggleBtn = document.getElementById("menu-toggle");
     const closeBtn = document.getElementById("close-menu");
     const mobileMenu = document.getElementById("mobile-menu");
 
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", (event) => {
       const toggle = document.getElementById("editions-toggle");
       const menu = document.getElementById("editions-menu");
-      if (toggle && menu && !toggle.contains(e.target)) {
+      if (toggle && menu && !toggle.contains(event.target)) {
         menu.classList.add("hidden");
       }
     });
 
     if (toggleBtn && closeBtn && mobileMenu) {
-      toggleBtn.addEventListener("click", () => {
-        mobileMenu.classList.remove("-translate-x-full");
-      });
-      closeBtn.addEventListener("click", () => {
-        mobileMenu.classList.add("-translate-x-full");
-      });
+      toggleBtn.addEventListener("click", () => mobileMenu.classList.remove("-translate-x-full"));
+      closeBtn.addEventListener("click", () => mobileMenu.classList.add("-translate-x-full"));
       mobileMenu.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.add("-translate-x-full");
-        });
+        link.addEventListener("click", () => mobileMenu.classList.add("-translate-x-full"));
       });
     }
 
-    // Show "Other" position text field
-    document.getElementById('position').addEventListener('change', function () {
-      const otherField = document.getElementById('other-position-field');
-      if (this.value === 'Other') {
-        otherField.classList.remove('hidden');
-        document.getElementById('other-position').required = true;
-      } else {
-        otherField.classList.add('hidden');
-        document.getElementById('other-position').required = false;
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+        const script = document.createElement("script");
+        script.src = "https://cdn.counter.dev/script.js";
+        script.setAttribute("data-id", "b3dc771d-812f-4e64-9ff1-986190e73657");
+        script.setAttribute("data-utcoffset", "1");
+        document.head.appendChild(script);
       }
     });
   </script>
-
 </body>
 
 </html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Event - FOMO26 - Foundation Model Challenge for Brain MRI</title>
+  <meta name="description"
+    content="FOMO26 event: half-day workshop at MICCAI 2026, 1 October 2026, Strasbourg. Keynotes and participant presentations." />
+  <link rel="canonical" href="https://fomo26.github.io/event/" />
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="FOMO26" />
+  <meta property="og:title" content="FOMO26 Event - MICCAI 2026" />
+  <meta property="og:description"
+    content="Half-day FOMO26 workshop at MICCAI 2026, 1 October 2026, Strasbourg." />
+  <meta property="og:url" content="https://fomo26.github.io/event/" />
+  <meta property="og:image" content="https://fomo26.github.io/images/fomo26.png" />
+  <meta property="og:image:width" content="1320" />
+  <meta property="og:image:height" content="611" />
+  <meta property="og:image:alt" content="Overview of the FOMO26 brain MRI challenge" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FOMO26 Event - MICCAI 2026" />
+  <meta name="twitter:description" content="Half-day FOMO26 workshop at MICCAI 2026, 1 October 2026, Strasbourg." />
+  <meta name="twitter:image" content="https://fomo26.github.io/images/fomo26.png" />
+  <meta name="twitter:image:alt" content="Overview of the FOMO26 brain MRI challenge" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    .logo-fomo {
+      background: linear-gradient(to right, #2563eb, #db2777);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-26 { color: #db2777; }
+
+    .logo-link {
+      transition: filter 0.3s ease;
+      will-change: filter;
+      transform: translateZ(0);
+    }
+
+    .logo-link:hover { filter: drop-shadow(0 0 10px rgba(219, 39, 119, 0.65)); }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    main { flex: 1; }
+
+    [id] { scroll-margin-top: 90px; }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-900 overflow-x-hidden">
+  <header class="bg-white shadow sticky top-0 z-40">
+    <div class="max-w-5xl mx-auto px-4 py-6 sm:px-6 lg:px-8 flex justify-between items-center">
+      <h1 class="text-3xl font-bold tracking-tight"><a href="/" class="logo-link" title="FOMO26 home"><span
+            class="logo-fomo">FOMO</span><span class="logo-26">26</span></a></h1>
+
+      <button id="menu-toggle" class="focus:outline-none block md:hidden" aria-label="Open menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <nav class="hidden md:block" aria-label="Main navigation">
+        <ul class="flex space-x-4 justify-center items-center">
+          <li><a href="/#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
+          <li><a href="/#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
+          <li><a href="/#rules" class="text-gray-900 hover:text-gray-600">Rules</a></li>
+          <li><a href="/#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
+          <li class="relative">
+            <button id="editions-toggle" type="button"
+              onclick="document.getElementById('editions-menu').classList.toggle('hidden')"
+              class="text-gray-900 hover:text-gray-600 flex items-center gap-1" aria-haspopup="true">
+              Previous editions
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul id="editions-menu"
+              class="hidden absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <li><a href="https://fomo25.github.io" target="_blank" rel="noopener noreferrer"
+                  class="block px-4 py-2 text-gray-900 hover:bg-gray-100 rounded-lg">FOMO25</a></li>
+            </ul>
+          </li>
+          <li><a href="/results/" class="text-pink-600 font-semibold hover:text-pink-700">Results</a></li>
+          <li><a href="/event/" aria-current="page"
+              class="text-pink-600 font-semibold hover:text-pink-700">Event</a></li>
+        </ul>
+      </nav>
+
+      <div id="mobile-menu"
+        class="fixed top-0 left-0 h-full w-64 bg-white shadow transform -translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden p-6">
+        <button id="close-menu" class="mb-4 focus:outline-none" aria-label="Close menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        <ul class="flex flex-col space-y-4">
+          <li><a href="/#setup" class="text-gray-900 hover:text-gray-600">Setup</a></li>
+          <li><a href="/#timeline" class="text-gray-900 hover:text-gray-600">Timeline</a></li>
+          <li><a href="/#rules" class="text-gray-900 hover:text-gray-600">Rules</a></li>
+          <li><a href="/#team" class="text-gray-900 hover:text-gray-600">Team</a></li>
+          <li>
+            <p class="text-gray-500 text-sm font-medium mb-1">Previous editions</p>
+            <a href="https://fomo25.github.io" target="_blank" rel="noopener noreferrer"
+              class="text-gray-900 hover:text-gray-600 pl-2">FOMO25</a>
+          </li>
+          <li><a href="/event/" aria-current="page"
+              class="text-pink-600 font-semibold hover:text-pink-700">Event</a></li>
+          <li><a href="/results/" class="text-pink-600 font-semibold hover:text-pink-700">Results</a></li>
+        </ul>
+      </div>
+
+      <a href="https://conferences.miccai.org/2026/en/" target="_blank" rel="noopener noreferrer">
+        <img src="/images/miccai.png" alt="MICCAI Logo" class="h-12 w-auto object-contain" />
+      </a>
+    </div>
+  </header>
+
+  <main class="pb-12">
+    <div class="bg-white text-gray-900 max-w-4xl mx-auto px-6 sm:px-12 py-1 my-8 pb-16 rounded-lg shadow-md">
+      <div class="text-center my-12">
+        <h1 class="text-4xl font-bold tracking-tight">Schedule</h1>
+        <h2 class="text-2xl font-semibold text-gray-600 mt-4">Half-day event at MICCAI 2026</h2>
+        <p class="text-gray-600 mt-2">October 1, 2026 | 13:30 - 18:00 | Strasbourg, France</p>
+      </div>
+
+      <!-- Speakers Section -->
+      <div class="max-w-4xl mx-auto px-4 mb-10">
+        <h2 class="text-2xl font-bold mb-6 text-gray-900 text-center">Speakers</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <article class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+            <div class="p-6 flex flex-col items-center text-center">
+              <img src="/images/keynote-balestriero.png" alt="Randall Balestriero"
+                class="h-60 w-60 rounded-full object-cover" />
+              <h3 class="mt-4 text-xl font-semibold text-gray-900">Randall Balestriero</h3>
+              <p class="text-sm text-gray-600">Brown University</p>
+              <p class="mt-3 text-pink-600 font-medium">Counterfactual JEPAs for World Models in the Real World</p>
+              <a href="#balestriero-abstract-bio"
+                class="mt-4 inline-flex items-center gap-1 text-pink-600 hover:text-pink-700 font-medium">
+                Read abstract and bio →
+              </a>
+            </div>
+          </article>
+          <article class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+            <div class="p-6 flex flex-col items-center text-center">
+              <img src="/images/keynote-dancette.png" alt="Corentin Dancette"
+                class="h-60 w-60 rounded-full object-cover" />
+              <h3 class="mt-4 text-xl font-semibold text-gray-900">Corentin Dancette</h3>
+              <p class="text-sm text-gray-600">Raidium</p>
+              <p class="mt-3 text-pink-600 font-medium">Foundation models in radiology: One model for all tasks?</p>
+              <a href="#dancette-abstract-bio"
+                class="mt-4 inline-flex items-center gap-1 text-pink-600 hover:text-pink-700 font-medium">
+                Read abstract and bio →
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Program -->
+      <h2 class="text-2xl font-bold my-6">Program</h2>
+      <div class="my-8 text-left text-gray-800">
+        <div class="mb-2">
+          <span class="font-semibold">Location:</span>
+          <span>Auditorium Cassin (G), Strasbourg Convention Centre</span>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <!-- Opening -->
+        <div class="flex items-start border-b border-gray-200 pb-4">
+          <div class="flex-shrink-0 w-32">
+            <span class="text-lg font-semibold text-gray-900">13:30 - 13:40</span>
+          </div>
+          <div class="ml-6">
+            <h3 class="text-lg font-semibold text-gray-900">Opening remarks</h3>
+          </div>
+        </div>
+
+        <!-- Keynote 1 -->
+        <div class="flex items-start border-b border-gray-200 pb-4">
+          <div class="flex-shrink-0 w-32">
+            <span class="text-lg font-semibold text-gray-900">13:40 - 14:25</span>
+          </div>
+          <div class="ml-6">
+            <h3 class="text-lg font-semibold text-gray-900">Keynote 1</h3>
+            <p class="text-gray-700 mt-1"><strong>Randall Balestriero</strong> (Brown University)</p>
+            <p class="text-pink-600 font-medium italic">Counterfactual JEPAs for World Models in the Real World</p>
+          </div>
+        </div>
+
+        <!-- Challenge design -->
+        <div class="flex items-start border-b border-gray-200 pb-4">
+          <div class="flex-shrink-0 w-32">
+            <span class="text-lg font-semibold text-gray-900">14:25 - 14:50</span>
+          </div>
+          <div class="ml-6">
+            <h3 class="text-lg font-semibold text-gray-900">Challenge design and motivation</h3>
+          </div>
+        </div>
+
+        <!-- Presentations 1 -->
+        <div class="flex items-start border-b border-gray-200 pb-4">
+          <div class="flex-shrink-0 w-32">
+            <span class="text-lg font-semibold text-gray-900">14:50 - 15:30</span>
+          </div>
+          <div class="ml-6">
+            <h3 class="text-lg font-semibold text-gray-900">Presentations from participants (method track)</h3>
+            <ul class="list-disc list-inside mt-2">
+              <li>BAIA-BrainFM</li>
+              <li>BrainAI</li>
+              <li>Azmuth</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Break -->
+        <div class="flex items-center justify-center py-6">
+          <div class="bg-gray-100 text-gray-800 px-20 py-2 rounded-full font-semibold">Break</div>
+        </div>
+
+        <!-- Keynote 2 -->
+        <div class="flex items-start border-b border-gray-200 pb-4">
+          <div class="flex-shrink-0 w-32">
+            <span class="text-lg font-semibold text-gray-900">16:00 - 16:45</span>
+          </div>
+          <div class="ml-6">
+            <h3 class="text-lg font-semibold text-gray-900">Keynote 2</h3>
+            <p class="text-gray-700 mt-1"><strong>Corentin Dancette</strong> (Raidium)</p>
+            <p class="text-pink-600 font-medium italic">Foundation models in radiology: One model for all tasks?</p>
+          </div>
+        </div>
+
+        <!-- Presentations 2 -->
+        <div class="flex items-start border-b border-gray-200 pb-4">
+          <div class="flex-shrink-0 w-32">
+            <span class="text-lg font-semibold text-gray-900">16:45 - 17:15</span>
+          </div>
+          <div class="ml-6">
+            <h3 class="text-lg font-semibold text-gray-900">Presentations from participants (open track):</h3>
+            <ul class="list-disc list-inside mt-2">
+              <li>CGVision</li>
+              <li>bmic</li>
+              <li>FariaTeam</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Results and awards -->
+        <div class="flex items-start pb-4">
+          <div class="flex-shrink-0 w-32">
+            <span class="text-lg font-semibold text-gray-900">17:15 - 18:00</span>
+          </div>
+          <div class="ml-6">
+            <h3 class="text-lg font-semibold text-gray-900">Results and award ceremony</h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Abstract + bio: Randall Balestriero -->
+      <section id="balestriero-abstract-bio" class="border-gray-200 p-6 mt-8 md:p-8 text-gray-800">
+        <h3 class="text-2xl font-bold text-gray-900">Talk by Randall Balestriero</h3>
+
+        <h4 class="mt-4 text-lg font-semibold text-gray-900">Abstract: Counterfactual JEPAs for World Models in the Real
+          World</h4>
+        <p class="mt-2">
+          This talk presents a sequence of recent results on Joint-Embedding Predictive Architectures (JEPAs), spanning
+          self-supervised representation learning, action-conditioned world models, and counterfactual reasoning. We
+          begin with LeJEPA, which addresses representation collapse through a distributional principle: embeddings are
+          regularized toward an isotropic Gaussian using Sketched Isotropic Gaussian Regularization, producing a simple
+          predictive objective with theoretical guarantees and without teacher&ndash;student networks or stop-gradient
+          heuristics. We then introduce LeWorldModel, which extends this construction to sequential data by learning an
+          encoder and action-conditioned latent transition model, end-to-end from raw observations. By combining
+          next-embedding prediction with Gaussian latent regularization, the model supports planning and control
+          directly in representation space, without reconstructing future pixels. Finally, we discuss new directions in
+          counterfactual JEPAs, where object-level masking and latent interventions create structured
+          partial-observability problems that force the predictor to model interaction-dependent dynamics rather than
+          exploit local correlations. Throughout, we emphasize the geometric and statistical principles connecting these
+          methods, and ask when latent prediction is sufficient for learning causal, controllable abstractions of a
+          dynamical world.
+        </p>
+
+        <h4 class="mt-6 text-lg font-semibold text-gray-900">Bio</h4>
+        <p class="mt-2">
+          Randall is an Assistant Professor of Computer Science at Brown University, and a leading expert on
+          self-supervised learning, JEPAs, and World Models.
+        </p>
+      </section>
+
+      <!-- Abstract + bio: Corentin Dancette -->
+      <section id="dancette-abstract-bio" class="border-gray-200 p-6 mt-4 md:p-8 text-gray-800">
+        <h3 class="text-2xl font-bold text-gray-900">Talk by Corentin Dancette</h3>
+
+        <h4 class="mt-4 text-lg font-semibold text-gray-900">Abstract: Foundation models in radiology: One model for all
+          tasks?</h4>
+        <p class="mt-2">
+          In this talk, he will review recent work on foundation models for radiology and present Raidium's current
+          research, looking at how well existing models can support different tasks such as abnormality classification,
+          fine-grained segmentation and report generation.
+        </p>
+
+        <h4 class="mt-6 text-lg font-semibold text-gray-900">Bio</h4>
+        <p class="mt-2">
+          Corentin Dancette is Chief Research Officer at Raidium, where he
+          leads research on foundation models for radiology. His work spans image-text alignment, radiology report
+          generation, self-supervised learning, image segmentation, and object detection, and their team open-sourced
+          foundation models such as Curia, Jolia, and RadSAM. Before joining Raidium, he completed his PhD at Sorbonne
+          Universit&eacute;, where he worked on deep learning at the intersection of computer vision and language.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-gray-200 py-6 mt-0 w-full">
+    <div class="max-w-7xl mx-auto text-center text-sm text-gray-600">
+      &copy; 2026 FOMO Challenge. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById("menu-toggle");
+    const closeBtn = document.getElementById("close-menu");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    document.addEventListener("click", (e) => {
+      const toggle = document.getElementById("editions-toggle");
+      const menu = document.getElementById("editions-menu");
+      if (toggle && menu && !toggle.contains(e.target)) menu.classList.add("hidden");
+    });
+
+    if (toggleBtn && closeBtn && mobileMenu) {
+      toggleBtn.addEventListener("click", () => mobileMenu.classList.remove("-translate-x-full"));
+      closeBtn.addEventListener("click", () => mobileMenu.classList.add("-translate-x-full"));
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => mobileMenu.classList.add("-translate-x-full"));
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+        const script = document.createElement("script");
+        script.src = "https://cdn.counter.dev/script.js";
+        script.setAttribute("data-id", "b3dc771d-812f-4e64-9ff1-986190e73657");
+        script.setAttribute("data-utcoffset", "1");
+        document.head.appendChild(script);
+      }
+    });
+  </script>
+</body>
+
+</html>
